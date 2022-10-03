@@ -18,6 +18,8 @@
   height: 50px;
   display: flex;
   flex: 1 0 auto;
+  z-index: 999;
+  background-color: #fff;
   div {
     flex: 1;
     text-align: center;
