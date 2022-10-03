@@ -29,11 +29,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  background-color: #f3f4f6;
+  background-color: #F3F4F6;
+  padding-top: 80px;
   header {
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 80px;
-    border-bottom: 1px solid black;
+    // border-bottom: 1px solid rgb(100, 100, 100);
+    // background-color: #fff;
   }
   .nav-bar {
     width: 90%;
@@ -59,7 +63,7 @@ export default {
     align-items: center;
     width: 90%;
     height: 30px;
-    background-color: rgba(228, 229, 231, 0.5);
+    background-color: #E4E5E7;
     border-radius: 20px;
     line-height: 30px;
     padding-left: 10px;

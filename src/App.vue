@@ -30,20 +30,18 @@
   height: 55px;
   display: flex;
   justify-content: space-around;
+  z-index: 999;
+  background-color: #F3F4F6;
   border-top: 1px solid #ccc;
-  // flex: 1 0 auto;
   div {
     padding: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 12px;
-    // line-height: 50px;
-    // background-color: #ccc;
     div {
       img {
         width: 25px;
-        // padding: 0 0 3px 0;
       }
     }
   }
