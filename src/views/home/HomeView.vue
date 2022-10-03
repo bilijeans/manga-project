@@ -29,6 +29,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+  background-color: #f3f4f6;
   header {
     width: 100%;
     height: 80px;
@@ -38,10 +39,12 @@ export default {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 10px;
+    font-size: 12px;
     .nav-item {
       float: left;
-      width: 50px;
-      height: 30px;
+      // width: 50px;
+      // height: 30px;
+      padding: 5px 15px;
       line-height: 30px;
       text-align: center;
     }
@@ -52,9 +55,11 @@ export default {
     }
   }
   .search-box {
+    display: flex;
+    align-items: center;
     width: 90%;
     height: 30px;
-    background-color: rgba(204, 204, 204, 0.5);
+    background-color: rgba(228, 229, 231, 0.5);
     border-radius: 20px;
     line-height: 30px;
     padding-left: 10px;
@@ -71,18 +76,17 @@ export default {
 }
 .nav-item.router-link-exact-active {
   position: relative;
-  font-size: 20px;
-  // border-bottom: 2px solid blue;
-  &::after{
-    content: '';
+  font-size: 16px;
+  &::after {
+    content: "";
     display: block;
     position: absolute;
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: 20px;
-    background-color: skyblue;
-    height: 2px;
+    width: 22px;
+    background-color: #00adf1;
+    height: 4px;
     border-radius: 2px;
   }
 }
