@@ -2,13 +2,13 @@
   <div class="home">
     <header>
       <div class="nav-bar">
-        <router-link class="nav-item" tag="div" to="/recommend"
+        <router-link class="nav-item" tag="div" to="/home/recommend"
           >推荐</router-link
         >
-        <router-link class="nav-item" tag="div" to="/update">更新</router-link>
-        <router-link class="nav-item" tag="div" to="/rank">排行</router-link>
+        <router-link class="nav-item" tag="div" to="/home/update">更新</router-link>
+        <router-link class="nav-item" tag="div" to="/home/rank">排行</router-link>
       </div>
-      <router-link class="search-box" tag="div" to="/search">
+      <router-link class="search-box" tag="div" to="/home/search">
         <i class="wd-icon-search"></i>
         <span>搜书名、作者、主角，一搜即有</span>
       </router-link>
@@ -17,16 +17,6 @@
     <router-view></router-view>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-
-export default {
-  // name: 'home',
-  // components: {
-  // }
-};
-</script>
 <style lang="scss" scoped>
 .home {
   background-color: #F3F4F6;
@@ -37,8 +27,6 @@ export default {
     top: 0;
     width: 100%;
     height: 80px;
-    // border-bottom: 1px solid rgb(100, 100, 100);
-    // background-color: #fff;
   }
   .nav-bar {
     width: 90%;
@@ -47,8 +35,6 @@ export default {
     font-size: 12px;
     .nav-item {
       float: left;
-      // width: 50px;
-      // height: 30px;
       padding: 5px 15px;
       line-height: 30px;
       text-align: center;
@@ -81,12 +67,7 @@ export default {
 }
 .nav-item.router-link-exact-active {
   position: relative;
-// <<<<<<< HEAD
-//   font-size: 20px;
-//   // border-bottom: 2px solid blue;
-// =======
   font-size: 16px;
-// >>>>>>> 7f8771b7508b106d60114c901147278ec89775fd
   &::after {
     content: "";
     display: block;

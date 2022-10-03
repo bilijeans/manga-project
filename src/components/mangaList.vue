@@ -1,5 +1,5 @@
 <template>
-  <ul class="items">
+  <ul class="rank-items">
     <li class="item" v-for="i in mangaListData.list" :key="i.comic_id">
       <img :src="'https://image.yqmh.com/mh/' + i.comic_id + '.jpg'" />
       <div class="info">
@@ -24,7 +24,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.items {
+.rank-items {
   .item {
     display: flex;
     padding: 10px 0px;

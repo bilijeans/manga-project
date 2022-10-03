@@ -10,15 +10,15 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView,
-    redirect:'recommend',
+    redirect:'/home/recommend',
     children: [
-      { path: '/recommend',name:'recommend',component:()=>import("../views/home/RecommendView.vue") },
-      { path: '/update',name:'update',component:()=>import("../views/home/UpdateView.vue") },
-      { path: '/rank',name:'rank',component:()=>import("../views/home/RankView.vue") },
-      { path: '/search',name:'search',component:()=>import("../views/home/SearchView.vue") },
+      { path: '/home/recommend',name:'recommend',component:()=>import("../views/home/RecommendView.vue") },
+      { path: '/home/update',name:'update',component:()=>import("../views/home/UpdateView.vue") },
+      { path: '/home/rank',name:'rank',component:()=>import("../views/home/RankView.vue") },
+      { path: '/home/search',name:'search',component:()=>import("../views/home/SearchView.vue") },
     ]
   },
   {
