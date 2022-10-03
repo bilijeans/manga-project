@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="footer">
-      <router-link tag="div" to="/">
+      <router-link tag="div" to="/home">
         <div><img src="./assets/home.svg" /></div>
         <span>主页</span>
       </router-link>
@@ -23,6 +23,9 @@
 </template>
 
 <style lang="scss">
+#app {
+  padding-bottom: 50px;
+}
 .footer {
   position: fixed;
   bottom: 0px;
@@ -31,7 +34,7 @@
   display: flex;
   justify-content: space-around;
   z-index: 999;
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   border-top: 1px solid #ccc;
   div {
     padding: 4px;
@@ -45,6 +48,7 @@
       }
     }
   }
+  .router-link-active,
   .router-link-exact-active {
     color: #00adf1;
     font-weight: bold;
