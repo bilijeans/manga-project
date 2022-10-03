@@ -35,6 +35,21 @@ export default {
       height: auto;
     }
   }
+  .item:last-child{
+    border: 0px;
+  }
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+  &::after{
+    display: block;
+    content: 'T_T 没有更多了';
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+  }
 }
 .info {
   margin-left: 10px;

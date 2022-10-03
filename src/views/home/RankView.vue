@@ -149,6 +149,8 @@ export default {
 </script>
 <style lang="scss">
 .rank-nav {
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 60px;
   display: flex;
@@ -163,7 +165,6 @@ export default {
       width: 0px;
       height: 0px;
     }
-    
   }
   ul {
     width: 700px;
@@ -179,12 +180,19 @@ export default {
     width: 90%;
     // justify-content: space-between;
     margin: 0 auto;
-    li {
-      //   margin-right: 30px;
-    }
   }
   .active {
     color: red;
+  }
+}
+.rank-list {
+  width: 90%;
+  height: calc( 100vh - 190px);
+  margin: 0 auto;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
   }
 }
 </style>

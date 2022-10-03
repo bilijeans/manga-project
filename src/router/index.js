@@ -4,6 +4,7 @@ import HomeView from '../views/home/HomeView.vue'
 import BookcaseView from "../views/BookcaseView.vue";
 import ClassifyView from "../views/ClassifyView.vue";
 import PersonalView from "../views/PersonalView.vue";
+import MangaInfoView from "../views/MangaInfoView.vue";
 
 Vue.use(VueRouter)
 
@@ -35,11 +36,11 @@ const routes = [
     name: 'personal',
     component: PersonalView
   },
-  // {
-  //   path:'/search',
-  //   name:'search',
-  //   component:SearchView
-  // }
+  {
+    path:'/info',
+    name:'info',
+    component:MangaInfoView
+  }
 ]
 
 const router = new VueRouter({

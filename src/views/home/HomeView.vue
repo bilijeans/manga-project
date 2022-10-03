@@ -30,6 +30,7 @@ export default {
 <style lang="scss" scoped>
 .home {
   padding-top: 80px;
+
   header {
     position: fixed;
     top: 0;
@@ -77,8 +78,8 @@ export default {
   position: relative;
   font-size: 20px;
   // border-bottom: 2px solid blue;
-  &::after{
-    content: '';
+  &::after {
+    content: "";
     display: block;
     position: absolute;
     left: 0;

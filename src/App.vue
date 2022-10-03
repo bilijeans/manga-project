@@ -11,6 +11,9 @@
 </template>
 
 <style lang="scss">
+#app {
+  padding-bottom: 50px;
+}
 .footer {
   position: fixed;
   bottom: 0px;
@@ -27,7 +30,7 @@
     border-top: 1px solid #ccc;
     // background-color: #ccc;
   }
-  .router-link-exact-active{
+  .router-link-exact-active {
     color: rgb(40, 92, 248);
     font-weight: bold;
   }
