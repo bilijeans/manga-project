@@ -70,7 +70,20 @@ export default {
   }
 }
 .nav-item.router-link-exact-active {
+  position: relative;
   font-size: 20px;
-  border-bottom: 2px solid blue;
+  // border-bottom: 2px solid blue;
+  &::after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 20px;
+    background-color: skyblue;
+    height: 2px;
+    border-radius: 2px;
+  }
 }
 </style>
