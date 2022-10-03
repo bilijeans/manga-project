@@ -29,6 +29,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+  background-color: #F3F4F6;
   padding-top: 80px;
 
   header {
@@ -36,17 +37,19 @@ export default {
     top: 0;
     width: 100%;
     height: 80px;
-    border-bottom: 1px solid rgb(100, 100, 100);
-    background-color: #fff;
+    // border-bottom: 1px solid rgb(100, 100, 100);
+    // background-color: #fff;
   }
   .nav-bar {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 10px;
+    font-size: 12px;
     .nav-item {
       float: left;
-      width: 50px;
-      height: 30px;
+      // width: 50px;
+      // height: 30px;
+      padding: 5px 15px;
       line-height: 30px;
       text-align: center;
     }
@@ -57,9 +60,11 @@ export default {
     }
   }
   .search-box {
+    display: flex;
+    align-items: center;
     width: 90%;
     height: 30px;
-    background-color: rgba(204, 204, 204, 0.5);
+    background-color: #E4E5E7;
     border-radius: 20px;
     line-height: 30px;
     padding-left: 10px;
@@ -76,8 +81,12 @@ export default {
 }
 .nav-item.router-link-exact-active {
   position: relative;
-  font-size: 20px;
-  // border-bottom: 2px solid blue;
+// <<<<<<< HEAD
+//   font-size: 20px;
+//   // border-bottom: 2px solid blue;
+// =======
+  font-size: 16px;
+// >>>>>>> 7f8771b7508b106d60114c901147278ec89775fd
   &::after {
     content: "";
     display: block;
@@ -85,9 +94,9 @@ export default {
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: 20px;
-    background-color: skyblue;
-    height: 2px;
+    width: 22px;
+    background-color: #00adf1;
+    height: 4px;
     border-radius: 2px;
   }
 }
