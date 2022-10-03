@@ -29,10 +29,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+  padding-top: 80px;
   header {
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 80px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(100, 100, 100);
+    background-color: #fff;
   }
   .nav-bar {
     width: 90%;
