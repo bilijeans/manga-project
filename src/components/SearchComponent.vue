@@ -31,11 +31,18 @@
           placeholder="搜书名、作者、主角，一搜即有"
         />
       </div>
-      <span class="searchConfirm">搜索</span>
+      <span class="searchConfirm" @click="searchConfirm">搜索</span>
     </header>
     <main>
-      <div class="searchList" v-if = "str !== ''">
-        <div>123</div>
+      <div class="searchList" v-if="str !== ''">
+        <div
+          v-for="item in searchResult.data"
+          :key="item.comic_id"
+          :id="item.comic_id"
+          @click="getId"
+        >
+          {{ item.comic_name }}
+        </div>
       </div>
       <div class="hot-search">
         <div class="hot-search-head">
@@ -64,54 +71,33 @@
         </div>
         <div class="hot-search-content">
           <ul>
-            <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
+            <li
+              v-for="(item, index) in hotSearch.data"
+              :key="item.comic_id"
+              @click="getId"
+            >
+              <span class="hotNum">{{ index + 1 }}</span>
+              <span class="hotName" :id="item.comic_id">{{
+                item.comic_name
+              }}</span>
             </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-             <li>
-              <span class="hotNum">1</span>
-              <span class="hotName">王游戏</span>
-            </li>
-            
           </ul>
         </div>
       </div>
       <div class="history">
         <div class="history-head">
           <h4>搜索历史</h4>
-          <span>清除历史</span>
+          <span @click="clearHistory">清除历史</span>
+        </div>
+        <div class="history-content">
+          <div
+            class="historyContentList"
+            v-for="val in hisArr"
+            :key="val.value"
+            @click="searchHistory"
+          >
+            {{ val.value }}
+          </div>
         </div>
       </div>
     </main>
@@ -120,17 +106,76 @@
 
 
 <script>
+import { debounce } from "lodash-es";
+
 export default {
-  data(){
-    return{
-      str : ''
+  data() {
+    return {
+      str: "",
+      searchResult: {},
+      hotSearch: {},
+      hisArr : []
+    };
+  },
+  created() {
+    this.getSearch = debounce(this.getSearch);
+    this.getHotSearch = debounce(this.getHotSearch);
+    this.hisArr = JSON.parse(localStorage.getItem('history'))
+  },
+  mounted() {
+    this.getHotSearch();
+    this.getSearch();
+  },
+
+  methods: {
+    getSearch() {
+      this.$axios
+        .get(`https://www.kanman.com/api/getsortlist/?search_key=${this.str}`)
+        .then(({ data }) => {
+          this.searchResult = { ...data };
+
+          console.log("搜索结果==>", this.searchResult);
+        });
+    },
+    searchConfirm() {
+      this.getSearch();
+
+      this.hisArr = [...this.hisArr, { value: this.str }];
+
+      localStorage.setItem("history", JSON.stringify(this.hisArr));
+
+      this.str = "";
+    },
+    getHotSearch() {
+      this.$axios
+        .get(`https://www.kanman.com/api/gettopsearch`)
+        .then(({ data }) => {
+          data.data.pop();
+
+          this.hotSearch = { ...data };
+        });
+    },
+
+    getId(e) {
+      console.log("id ==>", e.target.id);
+    },
+
+    clearHistory() {
+      this.hisArr = []
+      let hisArr = []
+      localStorage.setItem("history", JSON.stringify(hisArr));
+
+    },
+
+    searchHistory (e) {
+      this.str = e.target.textContent
+
     }
-  }
-}
+  },
+};
 </script>
 
 <style>
-
 </style>
 
 
@@ -189,120 +234,130 @@ export default {
     }
   }
 
-  main{
+  main {
     position: relative;
 
-.searchList{
-  background: #fff;
-  width: 100%;
-  height: 94vh;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-
-
-  div{
-    height: 40px;
-    width: 100%;
-    font-size: 18px;
-    line-height: 40px;
-    padding-left: 20px;
-  }
-}
-
-.hot-search {
-    background-color: #f3f4f6;
-    height: 40vh;
-    .hot-search-head {
+    .searchList {
+      background: #fff;
       width: 100%;
-      height: 5vh;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      height: 94vh;
+      position: absolute;
+      top: 0%;
+      left: 0%;
 
-      h4 {
-        margin-left: 20px;
-      }
-
-      .change {
-        margin-right: 20px;
-        font-size: 12px;
-        color: #999;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      div {
+        height: 40px;
+        width: 100%;
+        font-size: 18px;
+        line-height: 40px;
+        padding-left: 20px;
       }
     }
 
-    .hot-search-content {
-      ul {
+    .hot-search {
+      background-color: #f3f4f6;
+      height: 40vh;
+      .hot-search-head {
+        width: 100%;
+        height: 5vh;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
-        
-        li{
-          margin: 15px 0;
-          width: 50vw;
-          height: 30px;
-          overflow: hidden;
-          line-height: 30px;
+        align-items: center;
 
-          .hotNum{
-            display: inline-block;
-            margin-left: 30px;
+        h4 {
+          margin-left: 20px;
+        }
 
-            
-          }
+        .change {
+          margin-right: 20px;
+          font-size: 12px;
+          color: #999;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
 
-          .hotName{
-            margin-left: 15px;
-            color: #666;
-          }
+      .hot-search-content {
+        ul {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
 
-          &:nth-child(1) .hotNum{
+          li {
+            margin: 15px 0;
+            width: 50vw;
+            height: 30px;
+            overflow: hidden;
+            line-height: 30px;
+
+            .hotNum {
+              display: inline-block;
+              margin-left: 30px;
+            }
+
+            .hotName {
+              margin-left: 15px;
+              color: #666;
+            }
+
+            &:nth-child(1) .hotNum {
               color: rgb(200, 0, 0);
             }
 
-             &:nth-child(2) .hotNum{
+            &:nth-child(2) .hotNum {
               color: rgb(255, 51, 0);
             }
 
-             &:nth-child(3) .hotNum{
+            &:nth-child(3) .hotNum {
               color: rgb(255, 102, 0);
             }
+          }
+        }
+      }
+    }
 
+    .history {
+      background-color: #f3f4f6;
+      height: 60vh;
+      box-shadow: 0px 1px 20px 0px #fff;
+      .history-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 5vh;
+        width: 100%;
+
+        h4 {
+          margin-left: 20px;
+        }
+
+        span {
+          margin-right: 20px;
+          font-size: 12px;
+          color: #999;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .history-content {
+        display: flex;
+        margin-top: 10px;
+        justify-content: start;
+        flex-wrap: wrap;
+
+        .historyContentList {
+          height: 20px;
+          line-height: 20px;
+          font-size: 16px;
+          margin: 5px 20px;
+          text-decoration: underline;
+          color: #999;
         }
       }
     }
   }
-
-  .history {
-    background-color: #f3f4f6;
-    height: 50vh;
-    box-shadow: 0px 1px 20px 0px #fff;
-    .history-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 5vh;
-      width: 100%;
-
-      h4 {
-        margin-left: 20px;
-      }
-
-      span {
-        margin-right: 20px;
-        font-size: 12px;
-        color: #999;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-    }
-  }
-  }
-
-  
 }
 </style>
