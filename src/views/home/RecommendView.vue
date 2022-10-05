@@ -2,19 +2,19 @@
   <div class="commend">
     <div class="con-ad">
       <div class="rank">
-        <img src="" />
+        <img src="@/assets/cup.jpg" />
         <div class="rank-title">
-          <span>排行榜</span>
-          <span>排行榜</span>
-          <span>排行榜</span>
+          <span class="rank-title-h">排行榜</span>
+          <span>海量精品漫画</span>
+          <span>立即去看看</span>
         </div>
       </div>
       <div class="update">
-        <img src="" />
+        <img src="https://image.yqmh.com/mh/108846.jpg" />
         <div class="update-title">
-          <span>今日更新</span>
-          <span>今日更新</span>
-          <span>今日更新</span>
+          <span class="rank-title-h">今日更新</span>
+          <span>全网同步</span>
+          <span>追漫快人一步</span>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@ export default {
       page: 1,
       pageSize: 6,
       date: "2022-10-1",
-      listData: "",
+      listData: {},
     };
   },
   computed: {
@@ -49,14 +49,15 @@ export default {
     },
   },
   watch: {
-    url() {},
+    url() {
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.date}`;
+    },
   },
   created() {
     this.getListData();
   },
   methods: {
     getListData() {
-      //   console.log(this.url);
       this.$axios.get(this.url).then(({ data }) => {
         console.log(data.data.list);
         this.listData = data.data.list;
@@ -77,15 +78,17 @@ export default {
     display: flex;
     justify-content: space-between;
     .rank {
+      background-image: linear-gradient(90deg, #fedeab, #fca959);
+      border-radius: 6px;
       width: 48%;
       height: 100%;
-      background-color: pink;
       display: flex;
       flex-direction: row;
+      align-items: center;
       img {
-        width: 45%;
-        height: 100%;
-        background-color: blue;
+        width: 40%;
+        height: 85%;
+        padding: 6px;
       }
       .rank-title {
         width: 55%;
@@ -94,21 +97,31 @@ export default {
         flex-direction: column;
         span {
           display: block;
-          padding: 7px;
+          padding: 6px;
           font-size: 12px;
+          color: #7b4306;
+        }
+        .rank-title-h {
+          font-size: 16px;
+          font-weight: bold;
         }
       }
     }
     .update {
+      background-image: linear-gradient(90deg, #fedeab, #fca959);
+      border-radius: 6px;
       width: 48%;
       height: 100%;
       background-color: pink;
       display: flex;
       flex-direction: row;
+      align-items: center;
       img {
-        width: 45%;
-        height: 100%;
-        background-color: blue;
+        width: 35%;
+        height: 90%;
+        margin-left: 8px;
+        border-radius: 6px;
+        background-color: #9a9a9a;
       }
       .update-title {
         width: 55%;
@@ -117,8 +130,13 @@ export default {
         flex-direction: column;
         span {
           display: block;
-          padding: 7px;
+          padding: 6px;
           font-size: 12px;
+          color: #7b4306;
+        }
+        .rank-title-h {
+          font-size: 16px;
+          font-weight: bold;
         }
       }
     }
@@ -129,7 +147,7 @@ export default {
     margin: 0 auto;
     .list-h {
       width: 100%;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -138,7 +156,7 @@ export default {
         font-size: 14px;
       }
       .more {
-        padding: 0 12px;
+        padding: 8px 12px;
         font-size: 12px;
         border-radius: 999px;
         color: #9a9a9a;

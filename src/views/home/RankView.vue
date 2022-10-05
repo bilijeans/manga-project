@@ -157,6 +157,7 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   overflow: auto;
+  margin-top: 8px;
   .style {
     width: 90%;
     margin: 0 auto;
