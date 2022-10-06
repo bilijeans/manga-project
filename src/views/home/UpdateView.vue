@@ -30,7 +30,11 @@ export default {
     return {
       page: 1,
       pageSize: 12,
-      date: "2022-10-1",
+      currentDate: "",
+      time: '',
+      fullYear: '',
+      month: '',
+      date: '',
       listData: {},
       timeData: {},
       timeDay: [],
@@ -38,18 +42,24 @@ export default {
   },
   computed: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.date}`;
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&currentDate=${this.currentDate}`;
     },
   },
   created() {
+    this.time = new Date();
+    this.fullYear = this.time.getFullYear();
+    this.month = this.time.getMonth() + 1;
+    this.date = this.time.getDate();
+    this.currentDate = this.fullYear + "-" + this.month + "-" + this.date;
     this.getUpdateListData();
     this.getTimeData();
   },
   methods: {
     getUpdateListData() {
       this.$axios.get(this.url).then(({ data }) => {
-        // console.log(data.data.list);
         this.listData = data.data.list;
+        console.log(this.url);
+        console.log(this.listData);
       });
     },
     getTimeData() {
@@ -67,7 +77,6 @@ export default {
       });
       let beforeYestoday = today - 2;
       for (let i = 0; i < num; i++) {
-        console.log(i);
         let num = beforeYestoday - i;
         num = num <= 0 ? num + 7 : num;
         let dayStr = this.weekday(num);
@@ -105,6 +114,9 @@ export default {
         this.timeDay[key].status = false;
         if (i == this.timeDay[key].dateId) {
           this.timeDay[key].status = true;
+          this.currentDate = this.fullYear + "-" + this.month + "-" + (2 + this.timeDay[key].dateId);
+          console.log(this.currentDate);
+          this.getUpdateListData();
         }
       }
     },
@@ -125,8 +137,6 @@ export default {
 .update-container {
   padding-top: 15px;
   .head {
-    // position: sticky;
-    // top: 0;
     width: 100%;
     padding: 10px 0;
     background-color: #00adf1;

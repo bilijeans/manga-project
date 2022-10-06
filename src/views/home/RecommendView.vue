@@ -44,18 +44,22 @@ export default {
     return {
       page: 1,
       pageSize: 6,
-      date: "2022-10-1",
+      currentDate: "",
+      time: "",
+      fullYear: "",
+      month: "",
+      date: "",
       listData: {},
     };
   },
   computed: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.date}`;
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.currentDate}`;
     },
   },
   watch: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.date}`;
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.currentDate}`;
     },
   },
   created() {
@@ -63,6 +67,11 @@ export default {
   },
   methods: {
     getListData() {
+      this.time = new Date();
+      this.fullYear = this.time.getFullYear();
+      this.month = this.time.getMonth() + 1;
+      this.date = this.time.getDate();
+      this.currentDate = this.fullYear + "-" + this.month + "-" + this.date;
       this.$axios.get(this.url).then(({ data }) => {
         console.log(data.data.list);
         this.listData = data.data.list;
@@ -124,7 +133,6 @@ export default {
       background-image: linear-gradient(90deg, #fedeab, #fca959);
       border-radius: 6px;
       width: 48%;
-      background-color: pink;
       display: flex;
       flex-direction: row;
       align-items: center;
