@@ -72,7 +72,7 @@ export default {
   background-color: #f3f4f6;
   .con-ad {
     width: 90%;
-    height: 80px;
+    height: 88px;
     margin: 0 auto;
     padding: 18px;
     display: flex;
@@ -81,7 +81,6 @@ export default {
       background-image: linear-gradient(90deg, #fedeab, #fca959);
       border-radius: 6px;
       width: 48%;
-      height: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -97,7 +96,7 @@ export default {
         flex-direction: column;
         span {
           display: block;
-          padding: 6px;
+          padding: 6.5px;
           font-size: 12px;
           color: #7b4306;
         }
@@ -111,7 +110,6 @@ export default {
       background-image: linear-gradient(90deg, #fedeab, #fca959);
       border-radius: 6px;
       width: 48%;
-      height: 100%;
       background-color: pink;
       display: flex;
       flex-direction: row;
@@ -130,7 +128,7 @@ export default {
         flex-direction: column;
         span {
           display: block;
-          padding: 6px;
+          padding: 6.5px;
           font-size: 12px;
           color: #7b4306;
         }
