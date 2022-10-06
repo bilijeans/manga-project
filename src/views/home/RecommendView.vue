@@ -24,7 +24,12 @@
         <span class="more">更多 ></span>
       </div>
       <div class="list-items">
-        <div class="items" v-for="n in listData" :key="n.comic_id">
+        <div
+          class="items"
+          v-for="n in listData"
+          :key="n.comic_id"
+          @click="turnRoute(n.comic_id, n.author_name)"
+        >
           <img :src="'https://image.yqmh.com/mh/' + n.comic_id + '.jpg'" />
           <span>{{ n.comic_name }}</span>
         </div>
@@ -61,6 +66,15 @@ export default {
       this.$axios.get(this.url).then(({ data }) => {
         console.log(data.data.list);
         this.listData = data.data.list;
+      });
+    },
+    turnRoute(num, str) {
+      this.$router.push({
+        path: "/info",
+        query: {
+          id: num,
+          author: str,
+        },
       });
     },
   },

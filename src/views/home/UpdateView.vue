@@ -11,7 +11,12 @@
       </div>
     </div>
     <div class="update-list">
-      <div class="items" v-for="n in listData" :key="n.comic_id">
+      <div
+        class="items"
+        v-for="n in listData"
+        :key="n.comic_id"
+        @click="turnRoute(n.comic_id, n.author_name)"
+      >
         <img :src="'https://image.yqmh.com/mh/' + n.comic_id + '.jpg'" />
         <span>{{ n.comic_name }}</span>
       </div>
@@ -102,6 +107,15 @@ export default {
           this.timeDay[key].status = true;
         }
       }
+    },
+    turnRoute(num, str) {
+      this.$router.push({
+        path: "/info",
+        query: {
+          id: num,
+          author: str,
+        },
+      });
     },
   },
 };

@@ -1,11 +1,7 @@
 <template>
   <div class="search-container">
     <header>
-      <router-link
-        to="/"
-        tag="i"
-        class="back wd-icon-thin-arrow-left"
-      ></router-link>
+      <i @click="back()" class="back wd-icon-thin-arrow-left"></i>
       <div class="search-box">
         <div class="searchIco">
           <svg
@@ -107,20 +103,19 @@
 
 <script>
 import { debounce } from "lodash-es";
-
 export default {
   data() {
     return {
       str: "",
       searchResult: {},
       hotSearch: {},
-      hisArr : []
+      hisArr: [],
     };
   },
   created() {
     this.getSearch = debounce(this.getSearch);
     this.getHotSearch = debounce(this.getHotSearch);
-    this.hisArr = JSON.parse(localStorage.getItem('history'))
+    this.hisArr = JSON.parse(localStorage.getItem("history"));
   },
   mounted() {
     this.getHotSearch();
@@ -161,24 +156,20 @@ export default {
     },
 
     clearHistory() {
-      this.hisArr = []
-      let hisArr = []
+      this.hisArr = [];
+      let hisArr = [];
       localStorage.setItem("history", JSON.stringify(hisArr));
-
     },
 
-    searchHistory (e) {
-      this.str = e.target.textContent
-
-    }
+    searchHistory(e) {
+      this.str = e.target.textContent;
+    },
+    back() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
-
-<style>
-</style>
-
-
 <style lang="scss">
 .search-container {
   position: fixed;
@@ -345,7 +336,7 @@ export default {
       .history-content {
         display: flex;
         margin-top: 10px;
-        justify-content: start;
+        justify-content: flex-start;
         flex-wrap: wrap;
 
         .historyContentList {

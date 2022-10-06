@@ -1,25 +1,37 @@
 <template>
-  <ul class="rank-items">
-    <li class="item" v-for="i in mangaListData.list" :key="i.comic_id">
-      <img :src="'https://image.yqmh.com/mh/' + i.comic_id + '.jpg'" />
-      <div class="info">
-        <div class="name">{{ i.comic_name }}</div>
-        <div class="type">{{ i.cartoon_type_list[0].name }}</div>
-        <div class="author">{{ i.author_name }}</div>
-        <div class="desc">
-          {{ i.comic_shortdesc ? i.comic_shortdesc : i.comic_feature }}
+  <div class="container">
+    <ul class="rank-items">
+      <li
+        class="item"
+        v-for="i in mangaListData.list"
+        :key="i.comic_id"
+        :to="'/info/' + i.comic_id"
+        @click="turnRoute(i,i.comic_id,i.author_name)"
+      >
+        <img :src="'https://image.yqmh.com/mh/' + i.comic_id + '.jpg'" />
+        <div class="info">
+          <div class="name">{{ i.comic_name }}</div>
+          <div class="type">{{ i.cartoon_type_list[0].name }}</div>
+          <div class="author">{{ i.author_name }}</div>
+          <div class="desc">
+            {{ i.comic_shortdesc ? i.comic_shortdesc : i.comic_feature }}
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
 </template>
 <script>
 export default {
   props: { mangaListData: Object },
   methods: {
-    // getComicCover(id){
-    //     this.$axios.get('https://image.yqmh.com/mh/')
-    // }
+    turnRoute(i,num,str) {
+      console.log(i);
+      this.$router.push({ path: "/info", query: {
+        id:num,author:str,
+      } });
+    },
   },
 };
 </script>
@@ -35,16 +47,16 @@ export default {
       height: auto;
     }
   }
-  .item:last-child{
+  .item:last-child {
     border: 0px;
   }
   &::-webkit-scrollbar {
     width: 0px;
     height: 0px;
   }
-  &::after{
+  &::after {
     display: block;
-    content: 'T_T 没有更多了';
+    content: "T_T 没有更多了";
     text-align: center;
     font-size: 12px;
     color: #666;

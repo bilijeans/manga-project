@@ -33,7 +33,7 @@
   height: 55px;
   display: flex;
   justify-content: space-around;
-  z-index: 999;
+  z-index: 100;
   background-color: #f3f4f6;
   border-top: 1px solid #ccc;
   div {

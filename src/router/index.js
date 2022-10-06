@@ -39,7 +39,8 @@ const routes = [
   {
     path:'/info',
     name:'info',
-    component:MangaInfoView
+    component:MangaInfoView,
+    props:true
   }
 ]
 
