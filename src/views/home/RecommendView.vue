@@ -28,7 +28,7 @@
           class="items"
           v-for="n in listData"
           :key="n.comic_id"
-          @click="turnRoute(n.comic_id, n.author_name)"
+          @click.stop="turnRoute(n.comic_id, n.author_name)"
         >
           <img :src="'https://image.yqmh.com/mh/' + n.comic_id + '.jpg'" />
           <span>{{ n.comic_name }}</span>

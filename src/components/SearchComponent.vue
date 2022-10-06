@@ -115,7 +115,7 @@ export default {
   created() {
     this.getSearch = debounce(this.getSearch);
     this.getHotSearch = debounce(this.getHotSearch);
-    this.hisArr = JSON.parse(localStorage.getItem("history"));
+    this.hisArr = JSON.parse(localStorage.getItem("history"))
   },
   mounted() {
     this.getHotSearch();
@@ -178,6 +178,7 @@ export default {
   width: 100%;
   height: 100vh;
   background-color: #fff;
+  z-index: 999;
   header {
     width: 100%;
     height: 50px;
@@ -227,7 +228,6 @@ export default {
 
   main {
     position: relative;
-
     .searchList {
       background: #fff;
       width: 100%;
