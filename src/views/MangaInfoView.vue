@@ -48,6 +48,7 @@
                 v-for="i in catalogList"
                 :key="i.chapterId"
                 class="catalog-item"
+                @click="readByCatalog(i.chapter_newid)"
               >
                 <!-- <span class="catalog-time">{{ i.publishTime }}</span -->
                 <span class="catalog-name">{{ i.chapter_name }}</span>
@@ -58,8 +59,9 @@
       </div>
     </main>
     <footer>
-      <div class="add">加入书架</div>
-      <div class="read">立即阅读</div>
+      <div class="add" v-if="!hasBook" @click="addToBookcase()">加入书架</div>
+      <div class="add" v-else @click="removeToBookcase()">移出书架</div>
+      <div class="read" @click="readStart()">立即阅读</div>
     </footer>
   </div>
 </template>
@@ -75,12 +77,14 @@ export default {
       choose: "details",
       catalogList: [],
       chapter_newid: null,
+      bookcase: [],
     };
   },
   created() {
     this.id = this.$route.query.id;
     this.author = this.$route.query.author;
-    console.log(window.openid);
+    this.bookcase = JSON.parse(localStorage.getItem("bookcase")) || [];
+
   },
   computed: {
     img() {
@@ -103,6 +107,17 @@ export default {
     catalogURL() {
       return `https://www.kanman.com/api/getchapterlist?comic_id=${this.id}`;
     },
+    hasBook(){
+      let flag = false
+      this.bookcase.forEach(e=>{
+        console.log(e);
+        if(e.bookId==this.id){
+          console.log(1);
+          flag = true
+        }
+      })
+      return flag
+    }
   },
   watch: {
     url() {
@@ -126,11 +141,52 @@ export default {
       this.style = data;
     },
     getCatalogList() {
-      this.$axios.get(this.catalogURL).then(({data})=>{
+      this.$axios.get(this.catalogURL).then(({ data }) => {
         console.log(data.data);
-        this.catalogList = data.data
-        this.catalogList = this.catalogList.reverse()
-      })
+        this.catalogList = data.data;
+        this.catalogList = this.catalogList.reverse();
+      });
+    },
+    readStart() {
+      this.$router.push({
+        path: "/read",
+        query: {
+          id: this.id,
+          chapterId: this.catalogList[0].chapter_newid,
+        },
+      });
+    },
+    readByCatalog(chapterId) {
+      this.$router.push({
+        path: "/read",
+        query: {
+          id: this.id,
+          chapterId: chapterId,
+        },
+      });
+    },
+    addToBookcase() {
+      /*
+        {
+          bookId:num
+          hisChapter:num
+        }
+      */
+      // this.hasBook = true;
+      // let bookcase = JSON.parse(localStorage.getItem("bookcase")) || [];
+      this.bookcase.push({
+        bookId: this.id,
+        hisChapter: this.mangaData.first_chapter_newid,
+      });
+
+      localStorage.setItem("bookcase", JSON.stringify(this.bookcase));
+    },
+    removeToBookcase() {
+      // this.hasBook = false;
+      this.bookcase = this.bookcase.filter((e) => {
+        return e.bookId != this.id;
+      });
+      localStorage.setItem("bookcase", JSON.stringify(this.bookcase));
     },
   },
 };
