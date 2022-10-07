@@ -28,7 +28,7 @@
           class="items"
           v-for="n in listData"
           :key="n.comic_id"
-          @click="turnRoute(n.comic_id, n.author_name)"
+          @click.stop="turnRoute(n.comic_id, n.author_name)"
         >
           <img :src="'https://image.yqmh.com/mh/' + n.comic_id + '.jpg'" />
           <span>{{ n.comic_name }}</span>
@@ -44,18 +44,22 @@ export default {
     return {
       page: 1,
       pageSize: 6,
-      date: "2022-10-1",
+      currentDate: "",
+      time: "",
+      fullYear: "",
+      month: "",
+      date: "",
       listData: {},
     };
   },
   computed: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.date}`;
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.currentDate}`;
     },
   },
   watch: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.date}`;
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.currentDate}`;
     },
   },
   created() {
@@ -63,6 +67,11 @@ export default {
   },
   methods: {
     getListData() {
+      this.time = new Date();
+      this.fullYear = this.time.getFullYear();
+      this.month = this.time.getMonth() + 1;
+      this.date = this.time.getDate();
+      this.currentDate = this.fullYear + "-" + this.month + "-" + this.date;
       this.$axios.get(this.url).then(({ data }) => {
         console.log(data.data.list);
         this.listData = data.data.list;
@@ -86,7 +95,7 @@ export default {
   background-color: #f3f4f6;
   .con-ad {
     width: 90%;
-    height: 80px;
+    height: 88px;
     margin: 0 auto;
     padding: 18px;
     display: flex;
@@ -95,7 +104,6 @@ export default {
       background-image: linear-gradient(90deg, #fedeab, #fca959);
       border-radius: 6px;
       width: 48%;
-      height: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -111,7 +119,7 @@ export default {
         flex-direction: column;
         span {
           display: block;
-          padding: 6px;
+          padding: 6.5px;
           font-size: 12px;
           color: #7b4306;
         }
@@ -125,8 +133,6 @@ export default {
       background-image: linear-gradient(90deg, #fedeab, #fca959);
       border-radius: 6px;
       width: 48%;
-      height: 100%;
-      background-color: pink;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -144,7 +150,7 @@ export default {
         flex-direction: column;
         span {
           display: block;
-          padding: 6px;
+          padding: 6.5px;
           font-size: 12px;
           color: #7b4306;
         }
