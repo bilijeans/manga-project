@@ -11,8 +11,8 @@
         <img :src="'https://image.yqmh.com/mh/' + i.comic_id + '.jpg'" />
         <div class="info">
           <div class="name">{{ i.comic_name }}</div>
-          <div class="type">{{ i.cartoon_type_list[0].name }}</div>
-          <div class="author">{{ i.author_name }}</div>
+          <div class="type" v-if="i.cartoon_type_list">{{ i.cartoon_type_list[0].name }}</div>
+          <div class="author" v-if="i.author_name">{{ i.author_name }}</div>
           <div class="desc">
             {{ i.comic_shortdesc ? i.comic_shortdesc : i.comic_feature }}
           </div>
