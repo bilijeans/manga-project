@@ -169,6 +169,7 @@ export default {
   width: 100%;
   height: 100vh;
   background-color: #fff;
+  z-index: 999;
   header {
     width: 100%;
     height: 50px;
@@ -218,7 +219,6 @@ export default {
 
   main {
     position: relative;
-
     .searchList {
       background: #fff;
       width: 100%;

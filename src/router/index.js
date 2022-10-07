@@ -5,6 +5,7 @@ import BookcaseView from "../views/BookcaseView.vue";
 import ClassifyView from "../views/ClassifyView.vue";
 import PersonalView from "../views/PersonalView.vue";
 import MangaInfoView from "../views/MangaInfoView.vue";
+import ReadView from "../views/ReadView.vue";
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,12 @@ const routes = [
     path:'/info',
     name:'info',
     component:MangaInfoView,
+    props:true
+  },
+  {
+    path:'/read',
+    name:'read',
+    component:ReadView,
     props:true
   }
 ]
