@@ -58,10 +58,8 @@ export default {
   },
   methods: {
     getUpdateListData() {
-      console.log(this.url);
       this.$axios.get(this.url).then(({ data }) => {
         this.listData = data.data.list;
-        console.log(data, this.url);
       });
     },
     getTimeData() {
@@ -121,7 +119,6 @@ export default {
             this.month +
             "-" +
             (2 + this.timeDay[key].dateId);
-          console.log(this.currentDate);
           this.getUpdateListData();
         }
       }

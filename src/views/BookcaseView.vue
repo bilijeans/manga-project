@@ -145,21 +145,15 @@ export default {
   },
   created() {
     this.bookcase = JSON.parse(localStorage.getItem("bookcase")) || [];
-    console.log(this.bookcase);
   },
   methods: {
     isShowMore() {
       this.show = !this.show;
     },
-
-    test() {
-      console.log("in");
-    },
     async getLastChapter(id) {
       let { data } = await this.$axios.get(
         `https://www.kanman.com/api/getComicInfoAttribute?comic_id=${id}`
       );
-      console.log(data.data);
       return data.data.last_chapter_name;
     },
     turnToRead(id, newId) {
@@ -172,11 +166,9 @@ export default {
       });
     },
     deleteBook() {
-      console.log(1);
       this.show = true;
       this.bookSwitch = true;
       this.deleteBtn = true;
-      console.log(this.bookSwitch);
     },
     initHead() {
       this.bookSwitch = false;
@@ -184,15 +176,15 @@ export default {
     },
     removeBook(id) {
       this.bookcase = this.bookcase.filter((el) => {
-        return el.bookId !== id
+        return el.bookId !== id;
       });
-      localStorage.setItem('bookcase',JSON.stringify(this.bookcase))
+      localStorage.setItem("bookcase", JSON.stringify(this.bookcase));
     },
-    turnToSearch(){
+    turnToSearch() {
       this.$router.push({
-        path:'/home/search'
-      })
-    }
+        path: "/home/search",
+      });
+    },
   },
 };
 </script>
@@ -201,6 +193,7 @@ export default {
 <style lang="scss">
 .bg {
   position: relative;
+  padding-top: 50px;
   .mask {
     height: 100vh;
     width: 100vw;
@@ -210,17 +203,20 @@ export default {
     left: 0%;
     right: 0%;
     bottom: 0%;
-    z-index: 1000;
+    z-index: 100;
   }
 
   header {
+    position: fixed;
+    top: 0;
     width: 100vw;
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 20px;
-
+    background-color: #fff;
+    z-index: 200;
     .search {
       margin-left: 20px;
       position: relative;
@@ -249,7 +245,7 @@ export default {
         right: -20px;
         background-color: #fff;
         border-radius: 10px;
-        z-index: 1001;
+        z-index: 999;
         ul {
           width: 100%;
           height: 100%;
@@ -272,13 +268,19 @@ export default {
   }
 
   main {
+    height: calc(100vh - 106px);
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
     .comicItem {
       position: relative;
       width: 100%;
       height: 15vh;
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
+      margin-bottom: 30px;
 
       .comicItemImg {
         height: 100%;
@@ -308,8 +310,8 @@ export default {
       }
       .delete {
         position: absolute;
-        right: 10px;
-        top: 0px;
+        right: 20px;
+        top: 10px;
         i {
           color: red;
         }

@@ -24,9 +24,7 @@
 <script>
 export default {
   created() {
-    console.log(1);
-    console.log(window.location.pathname);
-    if (window.location.pathname == "/") {
+    if (window.location.pathname == "/index.html" || window.location.pathname == "/moyuComic/") {
       this.$router.push({ path: "/home" });
     }
     this.getAllDate();

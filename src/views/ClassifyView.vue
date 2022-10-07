@@ -370,7 +370,7 @@ export default {
       let contentH = this.$refs.mangaList.scrollHeight;
       let scrollH = this.$refs.mangaList.scrollTop;
       let viewH = this.$refs.mangaList.clientHeight;
-      console.log(contentH, scrollH, viewH);
+
       if (contentH - scrollH == viewH) {
         this.page++;
         this.show += 20;
@@ -393,9 +393,6 @@ export default {
       this.page = 1;
       this.show = 20;
       this[type] = value;
-
-      console.log(type, value, name);
-
       this.selectResult = this.allComic;
 
       if (type === "title") {
@@ -428,7 +425,6 @@ export default {
           this.allComicSelect.push({ type, word: name.toLowerCase() });
         }
       }
-      console.log(this.allComicSelect);
       for (let j = 0; j < this.allComicSelect.length; j++) {
         this.selectResult = this.selectResult.filter((i) => {
           return (
@@ -493,11 +489,11 @@ header {
 
 nav {
   width: 100%;
-  padding: 0 10px;
 
   .navBox {
     position: relative;
     width: 100%;
+    padding: 0 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
