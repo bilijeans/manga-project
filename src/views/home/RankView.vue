@@ -139,9 +139,9 @@ export default {
       this.lastTimeValue = value;
     },
     getRankData() {
-      console.log(this.url);
       this.$axios.get(this.url).then(({ data }) => {
         this.rankList = data.data;
+        console.log(this.rankList);
       });
     },
   },

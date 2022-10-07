@@ -24,40 +24,30 @@
 <script>
 export default {
   created() {
+    console.log(1);
+    console.log(window.location.pathname);
     if (window.location.pathname == "/") {
       this.$router.push({ path: "/home" });
     }
+    this.getAllDate();
+  },
+
+  methods: {
+    getAllDate() {
+      if (localStorage.getItem("allComic") === null) {
+        this.$axios
+          .get("https://www.kanman.com/api/getComicList")
+          .then(({ data }) => {
+            let allComic = data.data;
+
+            localStorage.setItem("allComic", JSON.stringify(allComic));
+          });
+      } else {
+        return;
+      }
+    },
   },
 };
-</script>
-
-<script>
-export default {
-  created () { 
-      
-      this.getAllDate ()
-
-  },
-
-  methods : {
-   getAllDate () {
-     if(localStorage.getItem('allComic') === null){
-           this.$axios.get('https://www.kanman.com/api/getComicList').then(({ data }) => {
-          
-          let allComic = data.data;
-
-          localStorage.setItem("allComic", JSON.stringify(allComic));
-
-      });
-          
-      }else{
-        
-        return;
-
-      }
-    }
-  }
-}
 </script>
 
 <style lang="scss">
