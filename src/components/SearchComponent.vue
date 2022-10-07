@@ -25,6 +25,7 @@
           class="searchText"
           type="text"
           placeholder="搜书名、作者、主角，一搜即有"
+          @keydown.enter="searchConfirm"
         />
       </div>
       <span class="searchConfirm" @click="searchConfirm">搜索</span>
@@ -35,7 +36,7 @@
           v-for="item in searchResult.data"
           :key="item.comic_id"
           :id="item.comic_id"
-          @click="getId"
+          @click="turnToComic(item.comic_id, item.comic_author)"
         >
           {{ item.comic_name }}
         </div>
@@ -49,7 +50,7 @@
             <li
               v-for="(item, index) in hotSearch.data"
               :key="item.comic_id"
-              @click="getId"
+              @click="turnToComic(item.comic_id, item.comic_author)"
             >
               <span class="hotNum">{{ index + 1 }}</span>
               <span class="hotName" :id="item.comic_id">{{
@@ -102,15 +103,15 @@ export default {
   },
 
   computed: {
-    url(){
-      return `https://www.kanman.com/api/getsortlist/?search_key=${this.str}`
-    }
+    url() {
+      return `https://www.kanman.com/api/getsortlist/?search_key=${this.str}`;
+    },
   },
 
-  watch : {
-     url() {
-      this.getSearch()
-     }
+  watch: {
+    url() {
+      this.getSearch();
+    },
   },
 
   methods: {
@@ -147,8 +148,14 @@ export default {
         });
     },
 
-    getId(e) {
-      console.log("id ==>", e.target.id);
+    turnToComic(num, str) {
+      this.$router.push({
+        path: "/info",
+        query: {
+          id: num,
+          author: str,
+        },
+      });
     },
 
     clearHistory() {
