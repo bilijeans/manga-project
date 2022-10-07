@@ -31,6 +31,35 @@ export default {
 };
 </script>
 
+<script>
+export default {
+  created () { 
+      
+      this.getAllDate ()
+
+  },
+
+  methods : {
+   getAllDate () {
+     if(localStorage.getItem('allComic') === null){
+           this.$axios.get('https://www.kanman.com/api/getComicList').then(({ data }) => {
+          
+          let allComic = data.data;
+
+          localStorage.setItem("allComic", JSON.stringify(allComic));
+
+      });
+          
+      }else{
+        
+        return;
+
+      }
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
   padding-bottom: 50px;
