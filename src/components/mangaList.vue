@@ -3,8 +3,8 @@
     <ul class="rank-items">
       <li
         class="item"
-        v-for="i in mangaListData.list"
-        :key="i.comic_id"
+        v-for="(i,index) in mangaListData.list"
+        :key="index"
         :to="'/info/' + i.comic_id"
         @click="turnRoute(i,i.comic_id,i.author_name)"
       >
