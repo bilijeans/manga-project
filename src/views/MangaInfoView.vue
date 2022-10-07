@@ -110,9 +110,7 @@ export default {
     hasBook(){
       let flag = false
       this.bookcase.forEach(e=>{
-        console.log(e);
         if(e.bookId==this.id){
-          console.log(1);
           flag = true
         }
       })
@@ -126,7 +124,6 @@ export default {
         this.mangaData = data.data;
         this.dealWithStyle(this.mangaData.cartoon_type_list);
         this.chapter_newid = this.mangaData.first_chapter_newid;
-        console.log(data.data, this.chapter_newid);
       });
     },
     catalogURL() {
@@ -142,7 +139,6 @@ export default {
     },
     getCatalogList() {
       this.$axios.get(this.catalogURL).then(({ data }) => {
-        console.log(data.data);
         this.catalogList = data.data;
         this.catalogList = this.catalogList.reverse();
       });

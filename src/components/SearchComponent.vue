@@ -3,23 +3,7 @@
     <header>
       <i @click="back()" class="back wd-icon-thin-arrow-left"></i>
       <div class="search-box">
-        <div class="searchIco">
-          <svg
-            t="1664782037558"
-            class="icon"
-            viewBox="0 0 1040 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="1401"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M176.439478 676.824953c-139.585105-133.763516-139.585105-351.411535 0-485.179145 67.62826-64.84589 157.511383-100.492762 253.15572-100.492762 95.567589 0 185.449689 35.647895 253.078972 100.492762 139.585105 133.76761 139.585105 351.415628 0 485.179145-67.62826 64.777329-157.511383 100.484575-253.15572 100.484575C333.950861 777.309528 244.067738 741.602282 176.439478 676.824953L176.439478 676.824953 176.439478 676.824953zM1024.212848 955.665659 756.059552 698.643887c142.644791-161.752987 136.315642-403.047566-22.757307-555.514049-83.911108-80.436984-193.845916-120.617102-303.707047-120.617102-109.937878 0-219.880873 40.180118-303.779701 120.617102-167.754678 160.728658-167.754678 421.408749 0 582.215178 83.898829 80.364329 193.8408 120.613008 303.702953 120.613008 98.632391 0 196.124819-34.149774 275.908934-98.794074l268.225951 257.017678L1024.212848 955.665659 1024.212848 955.665659zM1024.212848 955.665659"
-              p-id="1402"
-            ></path>
-          </svg>
-        </div>
+        <i class="wd-icon-search"></i>
         <input
           v-model="str"
           class="searchText"
@@ -93,8 +77,8 @@ export default {
     };
   },
   created() {
-    this.getSearch = debounce(this.getSearch,1000);
-    this.getHotSearch = debounce(this.getHotSearch,1000);
+    this.getSearch = debounce(this.getSearch, 1000);
+    this.getHotSearch = debounce(this.getHotSearch, 1000);
     this.hisArr = JSON.parse(localStorage.getItem("history")) || [];
   },
   mounted() {
@@ -178,40 +162,38 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background-color: #fff;
+  background-color: #f3f4f6;
   z-index: 999;
   header {
     width: 100%;
     height: 50px;
     background-color: rgb(0, 166, 255);
     line-height: 50px;
-    padding-left: 10px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex: 1;
     .back {
-      font-size: 30px;
+      margin-left: 10px;
+      font-size: 20px;
       color: white;
     }
 
     .search-box {
-      width: 70vw;
-      height: 80%;
+      width: 60%;
+      height: 30px;
+      padding: 0 10px;
       background-color: #fff;
-      margin: 5px 20px 0 20px;
       border-radius: 10px;
       align-items: center;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      .searchIco {
-        width: 30px;
-        height: 30px;
-        background-color: #fff;
-        line-height: 35px;
-        text-align: center;
+      i {
+        color: #999;
       }
 
       .searchText {
@@ -226,6 +208,7 @@ export default {
 
     .searchConfirm {
       color: #fff;
+      margin-right: 20px;
     }
   }
 
@@ -250,41 +233,27 @@ export default {
 
     .hot-search {
       background-color: #f3f4f6;
-      height: 40vh;
+      height: 300px;
       .hot-search-head {
         width: 100%;
-        height: 5vh;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        h4 {
-          margin-left: 20px;
-        }
-
-        .change {
-          margin-right: 20px;
-          font-size: 12px;
-          color: #999;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
+        height: 30px;
+        line-height: 30px;
+        padding: 5px 10px;
       }
 
       .hot-search-content {
         ul {
+          height: 250px;
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
+          // align-items: ;
           flex-wrap: wrap;
-
+          margin-top: 20px;
           li {
-            margin: 15px 0;
-            width: 50vw;
+            width: 45%;
             height: 30px;
             overflow: hidden;
-            line-height: 30px;
-
+            font-size: 14px;
             .hotNum {
               display: inline-block;
               margin-left: 30px;
@@ -293,6 +262,7 @@ export default {
             .hotName {
               margin-left: 15px;
               color: #666;
+              white-space: nowrap;
             }
 
             &:nth-child(1) .hotNum {
@@ -313,7 +283,7 @@ export default {
 
     .history {
       background-color: #f3f4f6;
-      height: 60vh;
+      // height: 60vh;
       box-shadow: 0px 1px 20px 0px #fff;
       .history-head {
         display: flex;

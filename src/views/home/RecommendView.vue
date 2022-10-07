@@ -62,7 +62,7 @@ export default {
   },
   watch: {
     url() {
-      this.getListData()
+      this.getListData();
     },
   },
   created() {
@@ -75,10 +75,8 @@ export default {
   },
   methods: {
     getListData() {
-      console.log(this.url);
       this.$axios.get(this.url).then(({ data }) => {
-        console.log(data.data.list);
-        this.listData = data.data.list.slice(0,6);
+        this.listData = data.data.list.slice(0, 6);
       });
     },
     turnRoute(num, str) {
@@ -103,18 +101,24 @@ export default {
     changePage() {
       this.page = ((this.page + 1) % 3) + 1;
     },
-    turnToClassify(){
+    turnToClassify() {
       this.$router.push({
-        path:'/onlyclassify'
-      })
-    }
+        path: "/onlyclassify",
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss">
 .commend {
+  height: calc(100vh - 136px);
+  overflow: auto;
   background-color: #f3f4f6;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
   .con-ad {
     width: 90%;
     height: 88px;
@@ -186,6 +190,7 @@ export default {
   .manga-list {
     width: 90%;
     height: auto;
+    padding-bottom: 80px;
     margin: 0 auto;
     .list-h {
       width: 100%;

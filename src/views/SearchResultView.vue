@@ -1,25 +1,9 @@
 <template>
-  <div>
+  <div class="search-result-container">
     <div class="search-head">
       <i @click="back()" class="back wd-icon-thin-arrow-left"></i>
       <div class="search-box">
-        <div class="searchIco">
-          <svg
-            t="1664782037558"
-            class="icon"
-            viewBox="0 0 1040 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="1401"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M176.439478 676.824953c-139.585105-133.763516-139.585105-351.411535 0-485.179145 67.62826-64.84589 157.511383-100.492762 253.15572-100.492762 95.567589 0 185.449689 35.647895 253.078972 100.492762 139.585105 133.76761 139.585105 351.415628 0 485.179145-67.62826 64.777329-157.511383 100.484575-253.15572 100.484575C333.950861 777.309528 244.067738 741.602282 176.439478 676.824953L176.439478 676.824953 176.439478 676.824953zM1024.212848 955.665659 756.059552 698.643887c142.644791-161.752987 136.315642-403.047566-22.757307-555.514049-83.911108-80.436984-193.845916-120.617102-303.707047-120.617102-109.937878 0-219.880873 40.180118-303.779701 120.617102-167.754678 160.728658-167.754678 421.408749 0 582.215178 83.898829 80.364329 193.8408 120.613008 303.702953 120.613008 98.632391 0 196.124819-34.149774 275.908934-98.794074l268.225951 257.017678L1024.212848 955.665659 1024.212848 955.665659zM1024.212848 955.665659"
-              p-id="1402"
-            ></path>
-          </svg>
-        </div>
+        <i class="wd-icon-search"></i>
         <input
           v-model="keyword"
           class="searchText"
@@ -40,7 +24,7 @@
         {{ item.comic_name }}
       </div>
     </div>
-    <manga-list :mangaListData="searchResultData"></manga-list>
+    <manga-list class="manga-list" :mangaListData="searchResultData"></manga-list>
   </div>
 </template>
 <script>
@@ -87,7 +71,6 @@ export default {
   },
   created() {
     this.searchKey = this.searchKey = this.$route.query.keyword;
-    console.log((this.searchKey = this.$route.query.keyword));
     this.hisArr = JSON.parse(localStorage.getItem("history")) || [];
   },
   methods: {
@@ -96,18 +79,14 @@ export default {
     },
     getSearchResultData() {
       this.$axios.get(this.searchURL).then(({ data }) => {
-        console.log(data.data);
         this.searchResultData.list = data.data;
         this.searchResultData.totalnum = data.data.length;
-        console.log(this.searchResultData);
       });
     },
     searchConfirm() {
       this.$axios.get(this.newSearchURL).then(({ data }) => {
-        console.log(data.data);
         this.searchResultData.list = data.data;
         this.searchResultData.totalnum = data.data.length;
-        console.log(this.searchResultData);
       });
       this.hisArr = [...this.hisArr, { value: this.keyword }];
 
@@ -116,7 +95,6 @@ export default {
     },
     searchThink() {
       this.$axios.get(this.newSearchURL).then(({ data }) => {
-        console.log(data.data);
         this.searchThinkData = data.data;
       });
     },
@@ -133,6 +111,14 @@ export default {
 };
 </script>
 <style lang="scss">
+.search-result-container{
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  background-color: #fff;
+}
 .search-head {
   width: 100vw;
   height: 50px;
@@ -140,26 +126,26 @@ export default {
   padding-left: 10px;
   background-color: rgb(0, 166, 255);
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   .back {
+    margin-left: 10px;
+    font-size: 20px;
     color: white;
   }
   .search-box {
-    width: 70vw;
-    height: 80%;
+    width: 60%;
+    height: 30px;
+    padding: 0 10px;
     background-color: #fff;
-    margin: 5px 20px 0 20px;
     border-radius: 10px;
     align-items: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .searchIco {
-      width: 30px;
-      height: 30px;
-      background-color: #fff;
-      line-height: 35px;
-      text-align: center;
+    i {
+      color: #999;
     }
 
     .searchText {
@@ -170,6 +156,11 @@ export default {
       width: 90%;
       border-radius: 10px;
     }
+  }
+
+  .searchConfirm {
+    color: #fff;
+    margin-right: 20px;
   }
 }
 .searchList {
@@ -187,6 +178,14 @@ export default {
     font-size: 18px;
     line-height: 40px;
     padding-left: 20px;
+  }
+}
+.manga-list{
+  height: calc( 100vh - 50px);
+  overflow: auto;
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
   }
 }
 </style>

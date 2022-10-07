@@ -133,7 +133,6 @@ export default {
       this.$refs[this.lastStyleValue][0].className = "";
       this.$refs[value][0].className = "active";
       this.lastStyleValue = value;
-      console.log(this.$refs[value]);
     },
     changeTime(value) {
       this.time_type = value;
@@ -144,7 +143,6 @@ export default {
     getRankData() {
       this.$axios.get(this.url).then(({ data }) => {
         this.rankList = data.data;
-        console.log(this.rankList);
       });
     },
     back() {
