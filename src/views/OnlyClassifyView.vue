@@ -1,24 +1,10 @@
 <template>
-  <div class="classifyPage" ref="classifyPage">
+  <div class="only-classify-page" ref="classifyPage">
     <header ref="header">
       <div class="classifySearch" @click="turnToSearchView">
-        <svg
-          t="1664782037558"
-          class="icon"
-          viewBox="0 0 1040 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="1401"
-          width="20"
-          height="20"
-        >
-          <path
-            d="M176.439478 676.824953c-139.585105-133.763516-139.585105-351.411535 0-485.179145 67.62826-64.84589 157.511383-100.492762 253.15572-100.492762 95.567589 0 185.449689 35.647895 253.078972 100.492762 139.585105 133.76761 139.585105 351.415628 0 485.179145-67.62826 64.777329-157.511383 100.484575-253.15572 100.484575C333.950861 777.309528 244.067738 741.602282 176.439478 676.824953L176.439478 676.824953 176.439478 676.824953zM1024.212848 955.665659 756.059552 698.643887c142.644791-161.752987 136.315642-403.047566-22.757307-555.514049-83.911108-80.436984-193.845916-120.617102-303.707047-120.617102-109.937878 0-219.880873 40.180118-303.779701 120.617102-167.754678 160.728658-167.754678 421.408749 0 582.215178 83.898829 80.364329 193.8408 120.613008 303.702953 120.613008 98.632391 0 196.124819-34.149774 275.908934-98.794074l268.225951 257.017678L1024.212848 955.665659 1024.212848 955.665659zM1024.212848 955.665659"
-            p-id="1402"
-          ></path>
-        </svg>
+        <i @click="back()" class="back wd-icon-thin-arrow-left"></i>
       </div>
-      <div class="classifyComic">漫画</div>
+      <div class="classifyComic">分类漫画</div>
     </header>
 
     <nav>
@@ -388,7 +374,7 @@ export default {
       return "https://image.yqmh.com/mh/" + id + ".jpg";
     },
     showActive(type, value, name) {
-      this.$refs.mangaList.scrollTop;
+      this.$refs.mangaList.scrollTop = 0;
       this.selectResultCut = [];
       this.page = 1;
       this.show = 20;
@@ -456,17 +442,24 @@ export default {
         path: "/home/search",
       });
     },
+    back() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
 
 
 <style lang="scss" scoped>
-.classifyPage {
+.only-classify-page {
   position: fixed;
   width: 100vw;
-  height: calc(100vh - 56px);
+  height: 100vh;
   background-color: #fff;
+  z-index: 200;
+  main {
+    height: calc(100vh - 250px);
+  }
 }
 header {
   position: relative;
@@ -484,6 +477,9 @@ header {
     top: 0;
     left: 0;
     line-height: 50px;
+    i {
+      font-size: 20px;
+    }
   }
 
   .classifyComic {
@@ -559,7 +555,6 @@ nav {
 main {
   width: 100%;
   position: relative;
-  height: calc(100vh - 306px);
   overflow: auto;
 
   .null {

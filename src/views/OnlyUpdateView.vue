@@ -1,5 +1,8 @@
 <template>
-  <div class="update-container">
+  <div class="only-update-container">
+    <div class="only-update-head">
+      <i @click="back()" class="back wd-icon-thin-arrow-left"></i>更新
+    </div>
     <div class="head">
       <div
         @click="dateActive(i.dateId)"
@@ -135,17 +138,43 @@ export default {
         },
       });
     },
+    back() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
 
 <style lang="scss">
-.update-container {
-  // padding-top: 15px;
+.only-update-container {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 200;
+  .only-update-head {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(0, 166, 255);
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    i {
+      position: absolute;
+      // top: 10px;
+      left: 10px;
+      font-size: 30px;
+      color: white;
+    }
+  }
   .head {
     width: 100%;
     padding: 10px 0;
-    background-color: #00adf1;
+    background-color: #ff489d;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -156,13 +185,13 @@ export default {
     .date-active {
       padding: 5px 8px;
       border-radius: 10px;
-      color: #00adf1;
+      color: #ff489d;
       background-color: #fff;
     }
   }
   .update-list {
     width: 90%;
-    height: calc(100vh - 209px);
+    height: calc(100vh - 94px);
     margin: 10px auto;
     overflow: auto;
     display: flex;
@@ -181,10 +210,6 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-    }
-    &::-webkit-scrollbar{
-      width: 0;
-      height: 0;
     }
   }
 }

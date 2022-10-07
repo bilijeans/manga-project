@@ -20,8 +20,8 @@
 <style lang="scss" scoped>
 .home {
   background-color: #F3F4F6;
-  padding-top: 80px;
-
+  padding-top: 100px;
+  height: calc( 100vh - 155px);
   header {
     position: fixed;
     top: 0;

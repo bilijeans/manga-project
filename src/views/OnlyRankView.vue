@@ -1,5 +1,8 @@
 <template>
-  <div class="rank-container">
+  <div class="only-rank-container">
+    <div class="only-rank-head">
+      <i @click="back()" class="back wd-icon-thin-arrow-left"></i>排行榜
+    </div>
     <div class="rank-nav">
       <div class="style">
         <ul>
@@ -144,10 +147,50 @@ export default {
         console.log(this.rankList);
       });
     },
+    back() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
 <style lang="scss">
+.only-rank-container {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 200;
+  .only-rank-head {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(0, 166, 255);
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    i {
+      position: absolute;
+      // top: 10px;
+      left: 10px;
+      font-size: 30px;
+      color: white;
+    }
+  }
+  .rank-list {
+    width: 90%;
+    height: calc(100vh - 110px);
+    margin: 0 auto;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+  }
+}
+
 .rank-nav {
   position: sticky;
   top: 0;
@@ -159,6 +202,7 @@ export default {
   overflow: auto;
   .style {
     width: 90%;
+    padding: 5px 0;
     margin: 0 auto;
     overflow: auto;
     &::-webkit-scrollbar {
@@ -183,16 +227,6 @@ export default {
   }
   .active {
     color: red;
-  }
-}
-.rank-list {
-  width: 90%;
-  height: calc( 100vh - 216px);
-  margin: 0 auto;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
   }
 }
 </style>
