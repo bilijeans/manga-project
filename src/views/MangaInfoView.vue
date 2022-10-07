@@ -177,6 +177,8 @@ export default {
       this.bookcase.push({
         bookId: this.id,
         hisChapter: this.mangaData.first_chapter_newid,
+        hisChapterName:this.mangaData.first_chapter_name,
+        name:this.mangaData.comic_name
       });
 
       localStorage.setItem("bookcase", JSON.stringify(this.bookcase));

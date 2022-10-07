@@ -23,6 +23,12 @@
   </div>
 </template>
 <script>
+/*
+  mangaListData:{
+    list:Array,
+    totalNum:Number
+  }
+*/
 export default {
   props: { mangaListData: Object },
   methods: {

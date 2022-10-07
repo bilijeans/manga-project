@@ -7,6 +7,8 @@ import PersonalView from "../views/PersonalView.vue";
 import MangaInfoView from "../views/MangaInfoView.vue";
 import ReadView from "../views/ReadView.vue";
 import SearchResultView from "../views/SearchResultView.vue";
+import OnlyRankView from "../views/OnlyRankView.vue";
+import OnlyUpdateView from "../views/OnlyUpdateView.vue";
 
 Vue.use(VueRouter)
 
@@ -55,7 +57,18 @@ const routes = [
     name:'searchR',
     component:SearchResultView,
     props:true
-  }
+  },
+  {
+    path:'/onlyrank',
+    name:'onlyrank',
+    component:OnlyRankView
+  },
+  {
+    path:'/onlyupdate',
+    name:'onlyupdate',
+    component:OnlyUpdateView
+  },
+
 ]
 
 const router = new VueRouter({

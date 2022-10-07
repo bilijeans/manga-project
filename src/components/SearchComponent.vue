@@ -93,8 +93,8 @@ export default {
     };
   },
   created() {
-    this.getSearch = debounce(this.getSearch);
-    this.getHotSearch = debounce(this.getHotSearch);
+    this.getSearch = debounce(this.getSearch,1000);
+    this.getHotSearch = debounce(this.getHotSearch,1000);
     this.hisArr = JSON.parse(localStorage.getItem("history")) || [];
   },
   mounted() {
