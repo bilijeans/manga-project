@@ -9,6 +9,7 @@ import ReadView from "../views/ReadView.vue";
 import SearchResultView from "../views/SearchResultView.vue";
 import OnlyRankView from "../views/OnlyRankView.vue";
 import OnlyUpdateView from "../views/OnlyUpdateView.vue";
+import OnlyClassifyView from "../views/OnlyClassifyView.vue";
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,11 @@ const routes = [
     name:'onlyupdate',
     component:OnlyUpdateView
   },
+  {
+    path:'/onlyclassify',
+    name:'onlyclassify',
+    component:OnlyClassifyView
+  }
 
 ]
 

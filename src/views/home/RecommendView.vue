@@ -21,7 +21,7 @@
     <div class="manga-list">
       <div class="list-h">
         <span>全网都在看</span>
-        <span class="more">更多 ></span>
+        <span class="more" @click="turnToClassify">更多 ></span>
       </div>
       <div class="list-items">
         <div
@@ -33,6 +33,9 @@
           <img :src="'https://image.yqmh.com/mh/' + n.comic_id + '.jpg'" />
           <span>{{ n.comic_name }}</span>
         </div>
+      </div>
+      <div class="change" @click="changePage">
+        换一换<i class="wd-icon-refresh"></i>
       </div>
     </div>
     <!-- <search-component></search-component> -->
@@ -59,22 +62,23 @@ export default {
   },
   watch: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.currentDate}`;
+      this.getListData()
     },
   },
   created() {
+    this.time = new Date();
+    this.fullYear = this.time.getFullYear();
+    this.month = this.time.getMonth() + 1;
+    this.date = this.time.getDate();
+    this.currentDate = this.fullYear + "-" + this.month + "-" + this.date;
     this.getListData();
   },
   methods: {
     getListData() {
-      this.time = new Date();
-      this.fullYear = this.time.getFullYear();
-      this.month = this.time.getMonth() + 1;
-      this.date = this.time.getDate();
-      this.currentDate = this.fullYear + "-" + this.month + "-" + this.date;
+      console.log(this.url);
       this.$axios.get(this.url).then(({ data }) => {
         console.log(data.data.list);
-        this.listData = data.data.list;
+        this.listData = data.data.list.slice(0,6);
       });
     },
     turnRoute(num, str) {
@@ -96,6 +100,14 @@ export default {
         path: "/onlyupdate",
       });
     },
+    changePage() {
+      this.page = ((this.page + 1) % 3) + 1;
+    },
+    turnToClassify(){
+      this.$router.push({
+        path:'/onlyclassify'
+      })
+    }
   },
 };
 </script>
@@ -195,7 +207,7 @@ export default {
     }
     .list-items {
       width: 100%;
-      height: auto;
+      height: 400px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -208,7 +220,26 @@ export default {
           font-size: 12px;
           display: block;
           padding: 5px 3px 20px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
+      }
+    }
+    .change {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60%;
+      padding: 10px 20px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 16px;
+      background-color: #9a9a9a98;
+      border-radius: 20px;
+      i {
+        font-size: 16px;
+        margin-left: 10px;
       }
     }
   }
