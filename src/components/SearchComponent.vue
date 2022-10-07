@@ -115,7 +115,7 @@ export default {
   created() {
     this.getSearch = debounce(this.getSearch);
     this.getHotSearch = debounce(this.getHotSearch);
-    this.hisArr = JSON.parse(localStorage.getItem("history"))
+    this.hisArr = JSON.parse(localStorage.getItem("history"));
   },
   mounted() {
     this.getHotSearch();
@@ -138,7 +138,12 @@ export default {
       this.hisArr = [...this.hisArr, { value: this.str }];
 
       localStorage.setItem("history", JSON.stringify(this.hisArr));
-
+      this.$router.push({
+        path: "/searchR",
+        query: {
+          keyword: this.str,
+        },
+      });
       this.str = "";
     },
     getHotSearch() {

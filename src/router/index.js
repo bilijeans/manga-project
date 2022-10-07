@@ -6,6 +6,7 @@ import ClassifyView from "../views/ClassifyView.vue";
 import PersonalView from "../views/PersonalView.vue";
 import MangaInfoView from "../views/MangaInfoView.vue";
 import ReadView from "../views/ReadView.vue";
+import SearchResultView from "../views/SearchResultView.vue";
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,12 @@ const routes = [
     path:'/read',
     name:'read',
     component:ReadView,
+    props:true
+  },
+  {
+    path:'/searchR',
+    name:'searchR',
+    component:SearchResultView,
     props:true
   }
 ]

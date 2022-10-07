@@ -25,16 +25,17 @@
 </template>
 
 <script>
+export { whatday } from "@/utils/date";
 export default {
   data() {
     return {
       page: 1,
       pageSize: 12,
       currentDate: "",
-      time: '',
-      fullYear: '',
-      month: '',
-      date: '',
+      time: "",
+      fullYear: "",
+      month: "",
+      date: "",
       listData: {},
       timeData: {},
       timeDay: [],
@@ -42,7 +43,8 @@ export default {
   },
   computed: {
     url() {
-      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&currentDate=${this.currentDate}`;
+      return `https://www.kanman.com/api/updatelist?page=${this.page}&pageSize=${this.pageSize}&date=${this.currentDate}`;
+      //https://www.kanman.com/api/updatelist?page=1&pageSize=12&date=2022-10-1
     },
   },
   created() {
@@ -56,10 +58,10 @@ export default {
   },
   methods: {
     getUpdateListData() {
+      console.log(this.url);
       this.$axios.get(this.url).then(({ data }) => {
         this.listData = data.data.list;
-        console.log(this.url);
-        console.log(this.listData);
+        console.log(data, this.url);
       });
     },
     getTimeData() {
@@ -104,7 +106,6 @@ export default {
           return "周六";
         case 7:
           return "周日";
-
         default:
           break;
       }
@@ -114,7 +115,12 @@ export default {
         this.timeDay[key].status = false;
         if (i == this.timeDay[key].dateId) {
           this.timeDay[key].status = true;
-          this.currentDate = this.fullYear + "-" + this.month + "-" + (2 + this.timeDay[key].dateId);
+          this.currentDate =
+            this.fullYear +
+            "-" +
+            this.month +
+            "-" +
+            (2 + this.timeDay[key].dateId);
           console.log(this.currentDate);
           this.getUpdateListData();
         }
