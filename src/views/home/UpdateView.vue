@@ -138,7 +138,6 @@ export default {
 
 <style lang="scss">
 .update-container {
-  // padding-top: 15px;
   .head {
     width: 100%;
     padding: 10px 0;

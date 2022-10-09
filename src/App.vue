@@ -6,7 +6,7 @@
         <span>主页</span>
       </router-link>
       <router-link tag="div" to="/bookcase">
-        <div><img style="color: blue" src="./assets/bookcase.svg" /></div>
+        <div><img src="./assets/bookcase.svg" /></div>
         <span>书架</span>
       </router-link>
       <router-link tag="div" to="/classify">

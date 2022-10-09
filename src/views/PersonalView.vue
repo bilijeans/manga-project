@@ -29,15 +29,6 @@
   </div>
 </template>
 
-// <script>
-// export default {
-//   data() {
-//     return {
-//     };
-//   },
-// };
-// </script>
-
 <style lang="scss">
 .personal {
   background-color: #f3f4f6;
