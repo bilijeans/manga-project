@@ -77,6 +77,7 @@ export default {
     getListData() {
       this.$axios.get(this.url).then(({ data }) => {
         this.listData = data.data.list.slice(0, 6);
+        console.log(this.listData);
       });
     },
     turnRoute(num, str) {
@@ -238,12 +239,11 @@ export default {
       width: 60%;
       padding: 10px 20px;
       margin: 0 auto;
-      text-align: center;
-      font-size: 16px;
-      background-color: #9a9a9a98;
+      font-size: 14px;
+      color: #666;
+      background-color: #E4E5E7;
       border-radius: 20px;
       i {
-        font-size: 16px;
         margin-left: 10px;
       }
     }

@@ -163,17 +163,17 @@ export default {
     position: relative;
     width: 100%;
     height: 50px;
-    background-color: rgb(0, 166, 255);
+    background:  -gradient(135deg, rgb(158, 186, 243) 18%, rgba(103,191,244,1) 77%, rgba(49,220,255,1) 100%);
     text-align: center;
     line-height: 50px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: white;
     i {
       position: absolute;
       // top: 10px;
       left: 10px;
-      font-size: 30px;
+      font-size: 18px;
       color: white;
     }
   }
@@ -200,6 +200,7 @@ export default {
   overflow: auto;
   .style {
     width: 90%;
+    font-size: 14px;
     padding: 5px 0;
     margin: 0 auto;
     overflow: auto;
@@ -207,6 +208,15 @@ export default {
       width: 0px;
       height: 0px;
     }
+  }
+  .time {
+    display: flex;
+    width: 90%;
+    font-size: 14px;
+    margin: 0 auto;
+  }
+  .active {
+    color: red;
   }
   ul {
     width: 700px;
@@ -216,15 +226,6 @@ export default {
       width: 50px;
       margin-right: 20px;
     }
-  }
-  .time {
-    display: flex;
-    width: 90%;
-    // justify-content: space-between;
-    margin: 0 auto;
-  }
-  .active {
-    color: red;
   }
 }
 </style>

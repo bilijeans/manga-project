@@ -14,17 +14,19 @@
           </li>
         </ul>
       </div>
-      <ul class="time">
-        <li
-          v-for="i in rankNavTimeList"
-          :key="i.value"
-          @click="changeTime(i.value)"
-          :ref="i.value"
-          :class="{ active: i.value == 'day' }"
-        >
-          {{ i.name }}
-        </li>
-      </ul>
+      <div class="time">
+        <ul>
+          <li
+            v-for="i in rankNavTimeList"
+            :key="i.value"
+            @click="changeTime(i.value)"
+            :ref="i.value"
+            :class="{ active: i.value == 'day' }"
+          >
+            {{ i.name }}
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="rank-list">
       <manga-list :mangaListData="rankList"></manga-list>
@@ -157,6 +159,7 @@ export default {
   overflow: auto;
   .style {
     width: 90%;
+    font-size: 14px;
     margin: 0 auto;
     overflow: auto;
     &::-webkit-scrollbar {
@@ -164,28 +167,27 @@ export default {
       height: 0px;
     }
   }
-  ul {
-    width: 700px;
-    display: flex;
-    flex-wrap: nowrap;
-    li {
-      width: 50px;
-      margin-right: 20px;
-    }
-  }
   .time {
     display: flex;
     width: 90%;
-    // justify-content: space-between;
+    font-size: 14px;
     margin: 0 auto;
   }
   .active {
     color: red;
   }
+  ul {
+    width: 700px;
+    display: flex;
+    flex-wrap: nowrap;
+    li {
+      margin-right: 20px;
+    }
+  }
 }
 .rank-list {
   width: 90%;
-  height: calc( 100vh - 216px);
+  height: calc(100vh - 216px);
   margin: 0 auto;
   overflow: auto;
   &::-webkit-scrollbar {
