@@ -154,24 +154,29 @@ export default {
     position: relative;
     width: 100%;
     height: 50px;
-    background-color: rgb(0, 166, 255);
     text-align: center;
     line-height: 50px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: white;
+    background: linear-gradient(
+      135deg,
+      rgb(158, 186, 243) 18%,
+      rgba(103, 191, 244, 1) 77%,
+      rgba(49, 220, 255, 1) 100%
+    );
     i {
       position: absolute;
       // top: 10px;
       left: 10px;
-      font-size: 30px;
+      font-size: 18px;
       color: white;
     }
   }
   .head {
     width: 100%;
     padding: 10px 0;
-    background-color: #ff489d;
+    background-color: #00adf1;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -182,7 +187,7 @@ export default {
     .date-active {
       padding: 5px 8px;
       border-radius: 10px;
-      color: #ff489d;
+      color: #00adf1;
       background-color: #fff;
     }
   }
