@@ -186,7 +186,7 @@ export default {
       height: 30px;
       padding: 0 10px;
       background-color: #fff;
-      border-radius: 10px;
+      border-radius: 999px;
       align-items: center;
       display: flex;
       justify-content: space-between;

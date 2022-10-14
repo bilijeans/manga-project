@@ -117,7 +117,7 @@ export default {
           break;
         }
       }
-      if (contentH - scrollH == viewH - 3) {
+      if (contentH - scrollH >= viewH - 10) {
         this.scrollList.push(contentH);
         this.orderNum++;
         this.changeChapterId();

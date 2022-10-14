@@ -2,49 +2,10 @@
   <div class="bg">
     <div class="mask" v-show="show" @click="isShowMore"></div>
     <header>
-      <div class="search" @click="turnToSearch">
-        <svg
-          t="1664782037558"
-          class="icon"
-          viewBox="0 0 1040 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="1401"
-          width="20"
-          height="20"
-        >
-          <path
-            d="M176.439478 676.824953c-139.585105-133.763516-139.585105-351.411535 0-485.179145 67.62826-64.84589 157.511383-100.492762 253.15572-100.492762 95.567589 0 185.449689 35.647895 253.078972 100.492762 139.585105 133.76761 139.585105 351.415628 0 485.179145-67.62826 64.777329-157.511383 100.484575-253.15572 100.484575C333.950861 777.309528 244.067738 741.602282 176.439478 676.824953L176.439478 676.824953 176.439478 676.824953zM1024.212848 955.665659 756.059552 698.643887c142.644791-161.752987 136.315642-403.047566-22.757307-555.514049-83.911108-80.436984-193.845916-120.617102-303.707047-120.617102-109.937878 0-219.880873 40.180118-303.779701 120.617102-167.754678 160.728658-167.754678 421.408749 0 582.215178 83.898829 80.364329 193.8408 120.613008 303.702953 120.613008 98.632391 0 196.124819-34.149774 275.908934-98.794074l268.225951 257.017678L1024.212848 955.665659 1024.212848 955.665659zM1024.212848 955.665659"
-            p-id="1402"
-          ></path>
-        </svg>
-      </div>
-      <div class="comic">漫画</div>
-      <div class="more" @click.stop="isShowMore" v-show="!bookSwitch">
-        <svg
-          t="1664873469346"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="3284"
-          width="25"
-          height="25"
-        >
-          <path
-            d="M224 608c-52.928 0-96-43.072-96-96s43.072-96 96-96c52.928 0 96 43.072 96 96S276.928 608 224 608z"
-            p-id="3285"
-          ></path>
-          <path
-            d="M512 608c-52.928 0-96-43.072-96-96s43.072-96 96-96c52.928 0 96 43.072 96 96S564.928 608 512 608z"
-            p-id="3286"
-          ></path>
-          <path
-            d="M800 608c-52.928 0-96-43.072-96-96s43.072-96 96-96c52.928 0 96 43.072 96 96S852.928 608 800 608z"
-            p-id="3287"
-          ></path>
-        </svg>
-
+      <i class="wd-icon-search search" @click="turnToSearch">
+      </i>
+      <div class="title">书架</div>
+      <div class="wd-icon-more more" @click.stop="isShowMore" v-show="!bookSwitch">
         <div class="moreList" v-show="show">
           <ul>
             <li>
@@ -211,31 +172,22 @@ export default {
     top: 0;
     width: 100vw;
     height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    text-align: center;
+    line-height: 50px;
     font-size: 20px;
     background-color: #fff;
     z-index: 200;
     .search {
-      margin-left: 20px;
-      position: relative;
-
-      &::after {
-        content: "";
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background-color: red;
-        border-radius: 999px;
-        position: absolute;
-        top: -10px;
-        right: -10px;
-      }
+      position: absolute;
+      left: 20px;
     }
     .more {
-      margin-right: 20px;
-      position: relative;
+      position: absolute;
+      right: 20px;
+      top: 0;
 
       .moreList {
         width: 35vw;

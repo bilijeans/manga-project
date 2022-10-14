@@ -1,6 +1,6 @@
-import { Icon } from 'wot-design'
+import { Icon, Rate } from 'wot-design'
 
-const UIComponents = [Icon]
+const UIComponents = [Icon, Rate]
 
 const WotUIPlugin = {}
 

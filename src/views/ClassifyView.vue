@@ -1,23 +1,7 @@
 <template>
   <div class="classifyPage" ref="classifyPage">
     <header ref="header">
-      <div class="classifySearch" @click="turnToSearchView">
-        <svg
-          t="1664782037558"
-          class="icon"
-          viewBox="0 0 1040 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="1401"
-          width="20"
-          height="20"
-        >
-          <path
-            d="M176.439478 676.824953c-139.585105-133.763516-139.585105-351.411535 0-485.179145 67.62826-64.84589 157.511383-100.492762 253.15572-100.492762 95.567589 0 185.449689 35.647895 253.078972 100.492762 139.585105 133.76761 139.585105 351.415628 0 485.179145-67.62826 64.777329-157.511383 100.484575-253.15572 100.484575C333.950861 777.309528 244.067738 741.602282 176.439478 676.824953L176.439478 676.824953 176.439478 676.824953zM1024.212848 955.665659 756.059552 698.643887c142.644791-161.752987 136.315642-403.047566-22.757307-555.514049-83.911108-80.436984-193.845916-120.617102-303.707047-120.617102-109.937878 0-219.880873 40.180118-303.779701 120.617102-167.754678 160.728658-167.754678 421.408749 0 582.215178 83.898829 80.364329 193.8408 120.613008 303.702953 120.613008 98.632391 0 196.124819-34.149774 275.908934-98.794074l268.225951 257.017678L1024.212848 955.665659 1024.212848 955.665659zM1024.212848 955.665659"
-            p-id="1402"
-          ></path>
-        </svg>
-      </div>
+      <i class="wd-icon-search classifySearch" @click="turnToSearchView"> </i>
       <div class="classifyComic">漫画</div>
     </header>
 
@@ -28,13 +12,12 @@
         ref="navBox"
         :key="item.id"
       >
-        <div
-          class="arrow"
+        <i
+          class="wd-icon-arrow-down arrow"
           @click="navMore(index)"
           v-if="index == 0 || index == 3"
         >
-          >
-        </div>
+        </i>
         <div
           :class="{ active: i.value == $data[item.type] }"
           class="classifyItem"
@@ -331,23 +314,23 @@ export default {
       if (i === 0 && this.titleIsActive) {
         this.titleIsActive = !this.titleIsActive;
         this.$refs.navBox[i].className = "navBox navBoxActive";
-        this.$refs.navBox[i].firstElementChild.className = "arrow arrowActive";
-        this.$refs.navBox[i].firstElementChild.textContent = "∧";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow arrowActive wd-icon-arrow-up";
       } else if (i === 0 && !this.titleIsActive) {
         this.titleIsActive = !this.titleIsActive;
         this.$refs.navBox[i].className = "navBox";
-        this.$refs.navBox[i].firstElementChild.className = "arrow";
-        this.$refs.navBox[i].firstElementChild.textContent = ">";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow wd-icon-arrow-down";
       } else if (i === 3 && this.wordIsActive) {
         this.wordIsActive = !this.wordIsActive;
         this.$refs.navBox[i].className = "navBox navBoxActive";
-        this.$refs.navBox[i].firstElementChild.className = "arrow arrowActive";
-        this.$refs.navBox[i].firstElementChild.textContent = "∧";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow arrowActive wd-icon-arrow-up";
       } else {
         this.wordIsActive = !this.wordIsActive;
         this.$refs.navBox[i].className = "navBox";
-        this.$refs.navBox[i].firstElementChild.className = "arrow";
-        this.$refs.navBox[i].firstElementChild.textContent = ">";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow wd-icon-arrow-down";
       }
     },
     // loading(e) {
@@ -371,7 +354,7 @@ export default {
       let scrollH = this.$refs.mangaList.scrollTop;
       let viewH = this.$refs.mangaList.clientHeight;
 
-      if (contentH - scrollH == viewH) {
+      if (contentH - scrollH >= viewH - 10) {
         this.page++;
         this.show += 20;
         for (let i = (this.page - 1) * 20; i < this.show; i++) {
@@ -495,26 +478,25 @@ nav {
     width: 100%;
     padding: 0 10px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 10px;
-    height: 40px;
+    height: 30px;
     overflow: hidden;
 
     .arrow {
       width: 30px;
-      height: 30px;
+      height: 20px;
       text-align: center;
-      line-height: 30px;
-      background-color: #fff;
+      line-height: 20px;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.8), #fff);
       position: absolute;
-      //   top: 5px;
-      right: 0px;
+      right: 20px;
+    }
+    .wd-icon-arrow-down {
+      top: 2px;
     }
 
     .arrowActive {
-      bottom: 0px;
+      bottom: 9px;
     }
 
     .classifyTitle {
@@ -523,8 +505,8 @@ nav {
       line-height: 20px;
       width: 40px;
       height: 20px;
-      margin-left: 10px;
-      margin-top: 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
     }
 
     .classifyItem {
@@ -535,7 +517,7 @@ nav {
       //   width: 40px;
       padding: 0 5px;
       height: 20px;
-      margin-top: 10px;
+      margin-bottom: 10px;
       border: 1px solid white;
       border-radius: 10px;
 
@@ -555,9 +537,12 @@ nav {
 main {
   width: 100%;
   position: relative;
-  height: calc(100vh - 306px);
+  height: calc(100vh - 226px);
   overflow: auto;
-
+  &::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+  }
   .null {
     position: absolute;
     top: 360px;

@@ -148,9 +148,9 @@ export default {
     .date {
       color: #fff;
       font-size: 14px;
+      padding: 5px 8px;
     }
     .date-active {
-      padding: 5px 8px;
       border-radius: 10px;
       color: #00adf1;
       background-color: #fff;
@@ -164,6 +164,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    &::-webkit-scrollbar{
+      width: 0;
+    }
     .items {
       width: 31%;
       img {
@@ -178,7 +181,7 @@ export default {
         text-overflow: ellipsis;
       }
     }
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
       width: 0;
       height: 0;
     }
