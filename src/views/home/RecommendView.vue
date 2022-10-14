@@ -1,18 +1,18 @@
 <template>
   <div class="commend">
     <div class="con-ad">
-      <div class="rank">
+      <div class="rank" @click="turnToOnlyRank">
         <img src="@/assets/cup.jpg" />
         <div class="rank-title">
-          <span class="rank-title-h" @click="turnToOnlyRank">排行榜</span>
+          <span class="rank-title-h">排行榜</span>
           <span>海量精品漫画</span>
           <span>立即去看看</span>
         </div>
       </div>
-      <div class="update">
+      <div class="update" @click="turnToOnlyUpdate">
         <img src="https://image.yqmh.com/mh/108846.jpg" />
         <div class="update-title">
-          <span class="rank-title-h" @click="turnToOnlyUpdate">今日更新</span>
+          <span class="rank-title-h">今日更新</span>
           <span>全网同步</span>
           <span>追漫快人一步</span>
         </div>

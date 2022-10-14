@@ -8,7 +8,8 @@
     }"
   >
     <header>
-      <div class="back wd-icon-thin-arrow-left" @click="back()"></div>
+      <i class="back wd-icon-thin-arrow-left" @click="back()"></i>
+      <div class="title">{{mangaData.comic_name}}</div>
     </header>
     <main>
       <div class="manga-item">
@@ -232,18 +233,18 @@ export default {
     height: 50px;
     background-color: rgb(0, 166, 255);
     line-height: 50px;
-    padding-left: 10px;
-    display: flex;
-    flex: 1;
     .back {
-      font-size: 30px;
+      position: absolute;
+      left: 10px;
+      font-size: 20px;
       color: white;
     }
+    .title{
+      text-align: center;
+      color: #fff;
+      font-size: 17px;
+    }
   }
-}
-.back {
-  font-size: 30px;
-  color: black;
 }
 .manga-item {
   display: flex;

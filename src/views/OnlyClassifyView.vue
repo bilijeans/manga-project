@@ -506,7 +506,7 @@ nav {
       background-color: #fff;
       position: absolute;
       //   top: 5px;
-      left: 350px;
+      right: 0px;
     }
 
     .arrowActive {

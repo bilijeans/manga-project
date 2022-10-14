@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       id: null,
-      comicName:null,
+      comicName: null,
       catalogList: [],
       orderNum: null,
       nowCatalogId: null,
@@ -36,14 +36,14 @@ export default {
       scrollList: [0],
       show: false,
       initTools: true,
-      comicData:{}
+      comicData: {},
     };
   },
   created() {
     this.id = this.$route.query.id;
     this.nowCatalogId = this.$route.query.chapterId;
-    this.getComicData()
-    this.handleScroll = debounce(this.handleScroll,1000)
+    this.getComicData();
+    this.handleScroll = debounce(this.handleScroll, 1000);
   },
   mounted() {
     this.$refs.comicContent.addEventListener("scroll", this.handleScroll, true);
@@ -84,11 +84,15 @@ export default {
     // },
   },
   methods: {
-    getComicData(){
-      this.$axios.get(`https://www.kanman.com/api/getComicInfoAttribute?comic_id=${this.id}`).then(({data})=>{
-        this.comicData=data.data
-        this.comicName = data.data.comic_name
-      })
+    getComicData() {
+      this.$axios
+        .get(
+          `https://www.kanman.com/api/getComicInfoAttribute?comic_id=${this.id}`
+        )
+        .then(({ data }) => {
+          this.comicData = data.data;
+          this.comicName = data.data.comic_name;
+        });
     },
     initComicData() {
       for (let index = 0; index < this.catalogList.length; index++) {
@@ -113,7 +117,7 @@ export default {
           break;
         }
       }
-      if (contentH - scrollH == viewH) {
+      if (contentH - scrollH >= viewH - 10) {
         this.scrollList.push(contentH);
         this.orderNum++;
         this.changeChapterId();
@@ -154,13 +158,13 @@ export default {
     });
     if (hasBook) {
       bookcase[index].hisChapter = this.nowCatalogId;
-      bookcase[index].hisChapterName = this.nowCatalogName
+      bookcase[index].hisChapterName = this.nowCatalogName;
     } else {
       bookcase.push({
         bookId: this.id,
         hisChapter: this.nowCatalogId,
         hisChapterName: this.nowCatalogName,
-        name:this.comicName
+        name: this.comicName,
       });
     }
     localStorage.setItem("bookcase", JSON.stringify(bookcase));

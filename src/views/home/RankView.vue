@@ -28,7 +28,7 @@
         </ul>
       </div>
     </div>
-    <div class="rank-list">
+    <div class="rank-list" ref="rankList">
       <manga-list :mangaListData="rankList"></manga-list>
     </div>
   </div>
@@ -129,12 +129,14 @@ export default {
   methods: {
     changeSort(value) {
       this.sort_type = value;
+      this.$refs.rankList.scrollTop = 0;
       this.$refs[this.lastStyleValue][0].className = "";
       this.$refs[value][0].className = "active";
       this.lastStyleValue = value;
     },
     changeTime(value) {
       this.time_type = value;
+      this.$refs.rankList.scrollTop = 0;
       this.$refs[this.lastTimeValue][0].className = "";
       this.$refs[value][0].className = "active";
       this.lastTimeValue = value;

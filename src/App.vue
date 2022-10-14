@@ -24,7 +24,17 @@
 <script>
 export default {
   created() {
-    if (window.location.pathname == "/index.html" || window.location.pathname == "/moyuComic/") {
+    this.$axios.get({url:'https://book.tiexue.net/xmlhttp/Topic/GetNovelInfo.aspx?bocelID=34012',dataType:'text'}).then(data=>{
+      console.log(data);
+    })
+    this.$axios.get('book/DefaultNewTwo.aspx').then(data=>{
+      console.log(data);
+    })
+    if (
+      window.location.pathname == "/index.html" ||
+      window.location.pathname == "/moyuComic/" ||
+      window.location.pathname == "/"
+    ) {
       this.$router.push({ path: "/home" });
     }
     this.getAllDate();

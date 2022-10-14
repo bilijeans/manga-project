@@ -163,7 +163,7 @@ export default {
     position: relative;
     width: 100%;
     height: 50px;
-    background:  -gradient(135deg, rgb(158, 186, 243) 18%, rgba(103,191,244,1) 77%, rgba(49,220,255,1) 100%);
+    background:  linear-gradient(135deg, rgb(158, 186, 243) 18%, rgba(103,191,244,1) 77%, rgba(49,220,255,1) 100%);
     text-align: center;
     line-height: 50px;
     font-size: 18px;
