@@ -171,11 +171,14 @@ export default {
       */
       // this.hasBook = true;
       // let bookcase = JSON.parse(localStorage.getItem("bookcase")) || [];
+      console.log(this.mangaData);
       this.bookcase.push({
         bookId: this.id,
         hisChapter: this.mangaData.first_chapter_newid,
         hisChapterName:this.mangaData.first_chapter_name,
-        name:this.mangaData.comic_name
+        newChapterName:this.mangaData.last_chapter_name,
+        name:this.mangaData.comic_name,
+        desc:this.mangaData.comic_desc
       });
 
       localStorage.setItem("bookcase", JSON.stringify(this.bookcase));

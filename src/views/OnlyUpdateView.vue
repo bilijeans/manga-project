@@ -176,7 +176,13 @@ export default {
   .head {
     width: 100%;
     padding: 10px 0;
-    background-color: #00adf1;
+    // background-image: linear-gradient(45deg, rgb(183, 199, 255), rgb(117, 203, 212));
+    background-image: linear-gradient(
+      135deg,
+      rgb(158, 186, 243) 18%,
+      rgba(103, 191, 244, 1) 77%,
+      rgba(49, 220, 255, 1) 100%
+    );;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -187,7 +193,7 @@ export default {
     }
     .date-active {
       border-radius: 10px;
-      color: #00adf1;
+      color: #5ddaf9;
       background-color: #fff;
     }
   }

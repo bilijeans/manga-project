@@ -2,10 +2,13 @@
   <div class="bg">
     <div class="mask" v-show="show" @click="isShowMore"></div>
     <header>
-      <i class="wd-icon-search search" @click="turnToSearch">
-      </i>
+      <i class="wd-icon-search search" @click="turnToSearch"> </i>
       <div class="title">书架</div>
-      <div class="wd-icon-more more" @click.stop="isShowMore" v-show="!bookSwitch">
+      <div
+        class="wd-icon-more more"
+        @click.stop="isShowMore"
+        v-show="!bookSwitch"
+      >
         <div class="moreList" v-show="show">
           <ul>
             <li>
@@ -40,7 +43,7 @@
                   p-id="2520"
                 ></path>
               </svg>
-              <span>切换模式</span>
+              <span @click="model = !model">切换模式</span>
             </li>
             <li>
               <svg
@@ -65,7 +68,7 @@
       </div>
       <div class="turn-off" v-show="bookSwitch" @click="initHead">关闭</div>
     </header>
-    <main>
+    <main class="list-view" v-if="model">
       <div
         class="comicItem"
         v-for="i in bookcase"
@@ -82,13 +85,29 @@
             <span>{{ i.hisChapterName }}</span>
           </p>
           <p>
-            <span>2022-01-01 00:10 更新</span>
+            <span>最新章节：{{ i.newChapterName }}</span>
           </p>
         </div>
         <div class="delete" v-show="bookSwitch" @click="removeBook(i.bookId)">
           <i class="wd-icon-close-outline"></i>
         </div>
       </div>
+    </main>
+    <main class="card-view" v-else>
+      <div
+        class="comic-card"
+        v-for="i in bookcase"
+        :key="i.bookId"
+        @click="turnToRead(i.bookId, i.hisChapter)"
+      >
+        <img :src="`https://image.yqmh.com/mh/${i.bookId}.jpg`" />
+        <span>{{ i.name }}</span>
+        <div class="delete" v-show="bookSwitch" @click="removeBook(i.bookId)">
+          <i class="wd-icon-close-outline"></i>
+        </div>
+      </div>
+      <div class="comic-card"></div>
+      <div class="comic-card"></div>
     </main>
   </div>
 </template>
@@ -102,10 +121,15 @@ export default {
       bookcase: [],
       bookSwitch: false,
       deleteBtn: false,
+      model: null,
+      config: null,
     };
   },
   created() {
     this.bookcase = JSON.parse(localStorage.getItem("bookcase")) || [];
+    this.config = JSON.parse(localStorage.getItem("config")) || {};
+    console.log(this.config);
+    this.model = this.config.model
   },
   methods: {
     isShowMore() {
@@ -147,6 +171,14 @@ export default {
         path: "/home/search",
       });
     },
+  },
+  beforeDestroy() {
+    localStorage.setItem(
+      "config",
+      JSON.stringify({
+        model: this.model,
+      })
+    );
   },
 };
 </script>
@@ -226,6 +258,7 @@ export default {
   main {
     height: calc(100vh - 106px);
     overflow: auto;
+    padding: 0 20px;
     &::-webkit-scrollbar {
       width: 0px;
       height: 0px;
@@ -266,8 +299,51 @@ export default {
       }
       .delete {
         position: absolute;
-        right: 20px;
+        right: 0px;
         top: 10px;
+        i {
+          color: red;
+        }
+      }
+    }
+  }
+  .card-view {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    width: 100%;
+    padding: 0;
+    .comic-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      // align-items: ;
+      width: 30%;
+      // height: 200px;
+      padding-top: 10px;
+      margin-bottom: 5px;
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      span {
+        margin-top: 5px;
+        padding-left: 5px;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+      .delete {
+        position: absolute;
+        right: -5px;
+        top: 0px;
+        background-color: #fff;
+        border-radius: 999px;
         i {
           color: red;
         }
