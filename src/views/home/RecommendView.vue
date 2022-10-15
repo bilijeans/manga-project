@@ -77,7 +77,6 @@ export default {
     getListData() {
       this.$axios.get(this.url).then(({ data }) => {
         this.listData = data.data.list.slice(0, 6);
-        console.log(this.listData);
       });
     },
     turnRoute(num, str) {

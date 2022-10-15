@@ -52,8 +52,8 @@
         <div class="history-content">
           <div
             class="historyContentList"
-            v-for="val in hisArr"
-            :key="val.value"
+            v-for="(val,index) in hisArr"
+            :key="index"
             @click="searchHistory"
           >
             {{ val.value }}
@@ -104,8 +104,6 @@ export default {
         .get(`https://www.kanman.com/api/getsortlist/?search_key=${this.str}`)
         .then(({ data }) => {
           this.searchResult = { ...data };
-
-          console.log("搜索结果==>", this.searchResult);
         });
     },
     searchConfirm() {
