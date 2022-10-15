@@ -24,6 +24,7 @@
 <script>
 export default {
   created() {
+    console.log(window.location.pathname);
     if (
       window.location.pathname == "/index.html" ||
       window.location.pathname == "/moyuComic/" ||
