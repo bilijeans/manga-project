@@ -136,6 +136,7 @@ export default {
       this.deleteBtn = false;
     },
     removeBook(id) {
+      console.log(id);
       this.bookcase = this.bookcase.filter((el) => {
         return el.bookId !== id;
       });
@@ -214,6 +215,9 @@ export default {
       }
     }
     .turn-off {
+      position: absolute;
+      top: 0;
+      right: 20px;
       font-size: 16px;
       margin-right: 13px;
     }
