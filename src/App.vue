@@ -24,12 +24,6 @@
 <script>
 export default {
   created() {
-    this.$axios.get({url:'https://book.tiexue.net/xmlhttp/Topic/GetNovelInfo.aspx?bocelID=34012',dataType:'text'}).then(data=>{
-      console.log(data);
-    })
-    this.$axios.get('book/DefaultNewTwo.aspx').then(data=>{
-      console.log(data);
-    })
     if (
       window.location.pathname == "/index.html" ||
       window.location.pathname == "/moyuComic/" ||
