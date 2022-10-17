@@ -3,7 +3,7 @@
     <div class="mask" v-show="show" @click="isShowMore"></div>
     <header>
       <i class="wd-icon-search search" @click="turnToSearch"> </i>
-      <div class="title">书架</div>
+      <div class="title" style="font-size:18px;">书架</div>
       <div
         class="wd-icon-more more"
         @click.stop="isShowMore"
@@ -269,12 +269,11 @@ export default {
       height: 15vh;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
 
       .comicItemImg {
         height: 100%;
         width: 25%;
-        background-color: aquamarine;
         img {
           width: 100%;
         }
@@ -312,8 +311,9 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: flex-start;
-    width: 100%;
+    width: 90%;
     padding: 0;
+    margin: 0 auto;
     .comic-card {
       position: relative;
       display: flex;

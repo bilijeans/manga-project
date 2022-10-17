@@ -9,7 +9,24 @@
   >
     <header>
       <i class="back wd-icon-thin-arrow-left" @click="back()"></i>
-      <div class="title">{{mangaData.comic_name}}</div>
+      <div class="title">{{ mangaData.comic_name }}</div>
+      <div class="home" @click="turnToHome">
+        <svg
+          class="icon"
+          width="16px"
+          height="16.00px"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M568.064 841.1648H438.6304c-11.3152 0-20.48-9.1648-20.48-20.48v-164.0448c0-46.9504 38.1952-85.1968 85.1968-85.1968 46.9504 0 85.1968 38.1952 85.1968 85.1968v164.0448c0 11.3152-9.1648 20.48-20.48 20.48z m-108.9536-40.96h88.4736v-143.5648c0-24.3712-19.8656-44.2368-44.2368-44.2368-24.3712 0-44.2368 19.8656-44.2368 44.2368v143.5648z"
+          />
+          <path
+            d="M791.6544 915.968H210.9952c-28.5696 0-51.8656-23.2448-51.8656-51.8656v-314.5216h-14.336c-21.2992 0-40.1408-12.7488-48.128-32.512-7.936-19.7632-3.1744-42.0352 12.1856-56.7296l358.5536-344.2176a51.69664 51.69664 0 0 1 71.8336 0l358.5536 344.2176c15.36 14.7456 20.1216 37.0176 12.1856 56.7296a51.6096 51.6096 0 0 1-48.128 32.512h-18.3296v314.5216c0 28.5696-23.2448 51.8656-51.8656 51.8656zM503.3472 142.592c-2.7136 0-5.4272 1.024-7.5264 3.0208L137.2672 489.8304c-4.8128 4.608-3.3792 9.8816-2.56 11.9296s3.4816 6.8096 10.0864 6.8096h34.816c11.3152 0 20.48 9.1648 20.48 20.48v335.0016c0 5.9904 4.864 10.9056 10.9056 10.9056h580.6592c5.9904 0 10.9056-4.864 10.9056-10.9056v-335.0016c0-11.3152 9.1648-20.48 20.48-20.48h38.8096c6.656 0 9.2672-4.7616 10.0864-6.8096 0.8192-2.048 2.2016-7.3216-2.56-11.9296L510.8736 145.6128c-2.0992-1.9968-4.8128-3.0208-7.5264-3.0208z"
+          />
+        </svg>
+      </div>
     </header>
     <main>
       <div class="manga-item">
@@ -44,6 +61,9 @@
             </div>
           </div>
           <div v-else>
+            <div class="catalog-head" @click="changeCatalogPlain">
+              {{ plain ? "倒序" : "正序" }}
+            </div>
             <ul class="catalog-list">
               <li
                 v-for="i in catalogList"
@@ -62,7 +82,8 @@
     <footer>
       <div class="add" v-if="!hasBook" @click="addToBookcase()">加入书架</div>
       <div class="add" v-else @click="removeToBookcase()">移出书架</div>
-      <div class="read" @click="readStart()">立即阅读</div>
+      <div class="read" v-if="!hasHisRead" @click="readStart()">立即阅读</div>
+      <div class="read" v-else @click="readByCatalog(hisChapter)">继续阅读</div>
     </footer>
   </div>
 </template>
@@ -79,13 +100,17 @@ export default {
       catalogList: [],
       chapter_newid: null,
       bookcase: [],
+      plain: true,
+      hasHisRead: false,
+      hisChapter: null,
     };
   },
   created() {
+    this.hisChapter = null;
     this.id = this.$route.query.id;
     this.author = this.$route.query.author;
     this.bookcase = JSON.parse(localStorage.getItem("bookcase")) || [];
-
+    this.hasHis();
   },
   computed: {
     img() {
@@ -108,15 +133,16 @@ export default {
     catalogURL() {
       return `https://www.kanman.com/api/getchapterlist?comic_id=${this.id}`;
     },
-    hasBook(){
-      let flag = false
-      this.bookcase.forEach(e=>{
-        if(e.bookId==this.id){
-          flag = true
+    hasBook() {
+      let flag = false;
+      this.bookcase.forEach((e) => {
+        if (e.bookId == this.id) {
+          flag = true;
+          this.hisChapter = e.hisChapter;
         }
-      })
-      return flag
-    }
+      });
+      return flag;
+    },
   },
   watch: {
     url() {
@@ -150,15 +176,18 @@ export default {
         query: {
           id: this.id,
           chapterId: this.catalogList[0].chapter_newid,
+          author: this.author,
         },
       });
     },
     readByCatalog(chapterId) {
+      console.log(chapterId);
       this.$router.push({
         path: "/read",
         query: {
           id: this.id,
           chapterId: chapterId,
+          author: this.author,
         },
       });
     },
@@ -175,10 +204,11 @@ export default {
       this.bookcase.push({
         bookId: this.id,
         hisChapter: this.mangaData.first_chapter_newid,
-        hisChapterName:this.mangaData.first_chapter_name,
-        newChapterName:this.mangaData.last_chapter_name,
-        name:this.mangaData.comic_name,
-        desc:this.mangaData.comic_desc
+        hisChapterName: this.mangaData.first_chapter_name,
+        newChapterName: this.mangaData.last_chapter_name,
+        name: this.mangaData.comic_name,
+        desc: this.mangaData.comic_desc,
+        author: this.author,
       });
 
       localStorage.setItem("bookcase", JSON.stringify(this.bookcase));
@@ -189,7 +219,25 @@ export default {
         return e.bookId != this.id;
       });
       localStorage.setItem("bookcase", JSON.stringify(this.bookcase));
+      this.hasHisRead = false;
     },
+    changeCatalogPlain() {
+      this.plain = !this.plain;
+      this.catalogList = this.catalogList.reverse();
+    },
+    hasHis() {
+      this.bookcase.forEach((e) => {
+        if (e.bookId == this.id) {
+          this.hasHisRead = true;
+          this.hisChapter = e.hisChapter;
+        }
+      });
+    },
+    turnToHome(){
+      this.$router.push({
+        path:'/home'
+      })
+    }
   },
 };
 </script>
@@ -242,10 +290,26 @@ export default {
       font-size: 20px;
       color: white;
     }
-    .title{
+    .title {
       text-align: center;
       color: #fff;
       font-size: 17px;
+    }
+    .home {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      // border: 1px solid black;
+      background-color: #fff;
+      svg {
+        width: 28px;
+        height: 28px;
+        transform: translate(1px, -3px);
+        fill: #00adf1;
+      }
     }
   }
 }
@@ -311,6 +375,7 @@ export default {
     }
   }
   .card-container {
+    position: relative;
     width: 90%;
     margin: 0 auto;
     font-size: 14px;
@@ -329,12 +394,23 @@ export default {
     .desc {
       display: flex;
     }
+    .catalog-head {
+      position: absolute;
+      top: 0px;
+      right: 10px;
+      color: #00adf1;
+      font-size: 16px;
+    }
+    & > div {
+      padding-top: 20px;
+    }
     .catalog-list {
       width: 100%;
-      height: calc(100vh - 335px);
+      height: calc(100vh - 355px);
       overflow: auto;
       .catalog-item {
-        padding: 20px 0;
+        padding: 15px 0;
+        font-size: 16px;
         .catalog-time {
           margin-right: 10px;
         }

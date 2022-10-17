@@ -522,8 +522,8 @@ nav {
       border-radius: 10px;
 
       &.active {
-        border: 1px solid #0bb9d0;
-        color: #0bb9d0;
+        border: 1px solid #00adf1;
+        color: #00adf1;
       }
     }
   }

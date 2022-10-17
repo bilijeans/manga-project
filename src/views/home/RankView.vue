@@ -176,7 +176,7 @@ export default {
     margin: 0 auto;
   }
   .active {
-    color: red;
+    color: #00adf1;
   }
   ul {
     width: 700px;
