@@ -5,8 +5,12 @@
         <router-link class="nav-item" tag="div" to="/home/recommend"
           >推荐</router-link
         >
-        <router-link class="nav-item" tag="div" to="/home/update">更新</router-link>
-        <router-link class="nav-item" tag="div" to="/home/rank">排行</router-link>
+        <router-link class="nav-item" tag="div" to="/home/update"
+          >更新</router-link
+        >
+        <router-link class="nav-item" tag="div" to="/home/rank"
+          >排行</router-link
+        >
       </div>
       <router-link class="search-box" tag="div" to="/home/search">
         <i class="wd-icon-search"></i>
@@ -19,21 +23,29 @@
 </template>
 <style lang="scss" scoped>
 .home {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   padding-top: 100px;
-  height: calc( 100vh - 155px);
+  height: calc(100vh - 155px);
   header {
     position: fixed;
     top: 0;
     width: 100%;
     height: 80px;
-    background-color: #F3F4F6;
+    background: linear-gradient(
+      135deg,
+      rgb(158, 186, 243) 18%,
+      rgba(103, 191, 244, 1) 77%,
+      rgba(49, 220, 255, 1) 100%
+    );
+    padding-bottom: 20px;
+    // background-color: #F3F4F6;
   }
   .nav-bar {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 10px;
     font-size: 12px;
+    color: #333;
     .nav-item {
       float: left;
       padding: 5px 15px;
@@ -51,7 +63,7 @@
     align-items: center;
     width: 90%;
     height: 30px;
-    background-color: #E4E5E7;
+    background-color: #fff;
     border-radius: 20px;
     line-height: 30px;
     padding-left: 10px;
@@ -69,6 +81,8 @@
 .nav-item.router-link-exact-active {
   position: relative;
   font-size: 16px;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
   &::after {
     content: "";
     display: block;

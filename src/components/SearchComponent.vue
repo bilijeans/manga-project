@@ -52,7 +52,7 @@
         <div class="history-content">
           <div
             class="historyContentList"
-            v-for="(val,index) in hisArr"
+            v-for="(val, index) in hisArr"
             :key="index"
             @click="searchHistory"
           >
@@ -230,7 +230,7 @@ export default {
     }
 
     .hot-search {
-      background-color: #f3f4f6;
+      background-color: #fcfcfc;
       height: 300px;
       .hot-search-head {
         width: 100%;
@@ -246,7 +246,9 @@ export default {
           justify-content: space-around;
           // align-items: ;
           flex-wrap: wrap;
-          margin-top: 20px;
+          padding-top: 20px;
+          background-image: linear-gradient(#fcfcfc, #fff);
+          // background-color: #fff;
           li {
             width: 45%;
             height: 30px;
@@ -280,14 +282,13 @@ export default {
     }
 
     .history {
-      background-color: #f3f4f6;
+      background-color: #fcfcfc;
       // height: 60vh;
-      box-shadow: 0px 1px 20px 0px #fff;
       .history-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 5vh;
+        height: 40px;
         width: 100%;
 
         h4 {
@@ -309,7 +310,8 @@ export default {
         margin-top: 10px;
         justify-content: flex-start;
         flex-wrap: wrap;
-
+        height: calc(100vh - 400px);
+        background-image: linear-gradient(#fcfcfc, #fff);
         .historyContentList {
           height: 20px;
           line-height: 20px;

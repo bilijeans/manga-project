@@ -21,7 +21,7 @@
     <div class="manga-list">
       <div class="list-h">
         <span>全网都在看</span>
-        <span class="more" @click="turnToClassify">更多 ></span>
+        <span class="more" @click="turnToClassify">更多 <i class="wd-icon-arrow-right"></i> </span>
       </div>
       <div class="list-items">
         <div
@@ -31,7 +31,8 @@
           @click.stop="turnRoute(n.comic_id, n.author_name)"
         >
           <img :src="'https://image.yqmh.com/mh/' + n.comic_id + '.jpg'" />
-          <span>{{ n.comic_name }}</span>
+          <span class="name">{{ n.comic_name }}</span>
+          <span class="score">{{parseScore(n.score)}}</span>
         </div>
       </div>
       <div class="change" @click="changePage">
@@ -106,6 +107,9 @@ export default {
         path: "/onlyclassify",
       });
     },
+    parseScore(num){
+      return num.toFixed(1)
+    }
   },
 };
 </script>
@@ -217,17 +221,25 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
       .items {
+        position: relative;
         width: 31%;
         img {
           width: 100%;
         }
-        span {
+        .name {
           font-size: 12px;
           display: block;
           padding: 5px 3px 20px;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+        .score{
+          position: absolute;
+          right: 2px;
+          top: 2px;
+          font-size: 14px;
+          color: rgb(255, 238, 85);
         }
       }
     }

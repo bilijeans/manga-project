@@ -2,6 +2,8 @@
   <div class="read-tools">
     <div class="read-head">
       <i @click="back()" class="back wd-icon-thin-arrow-left"></i>
+      <div class="title">{{ title }}</div>
+      <div class="btn-book" @click="turnToBookInfo">详情</div>
     </div>
     <div class="bottom-tools" v-if="show">
       <div class="prev-chapter" @click="prevChapter()">上一章</div>
@@ -29,6 +31,9 @@ export default {
     catalogList: Array,
     nowCatalogId: String,
     initTools: Boolean,
+    title: String,
+    bookId: String,
+    author:String
   },
   data() {
     return {
@@ -45,6 +50,7 @@ export default {
   methods: {
     back() {
       this.$router.go(-1);
+      this.$router.go(0);
     },
     showChapterList() {
       this.show = false;
@@ -79,6 +85,15 @@ export default {
       }
       this.$emit("newChapter", chapter_newid);
     },
+    turnToBookInfo() {
+      this.$router.push({
+        path: "/info",
+        query: {
+          id: this.bookId,
+          author: this.author,
+        },
+      });
+    },
   },
 };
 </script>
@@ -88,15 +103,26 @@ export default {
   top: 0;
   z-index: 999;
   .read-head {
+    position: relative;
     width: 100vw;
     height: 30px;
+    padding: 10px 0;
     line-height: 30px;
     background-color: rgba(0, 0, 0, 0.6);
     .back {
+      position: absolute;
       padding-left: 10px;
       font-size: 20px;
       font-weight: lighter;
       color: white;
+    }
+    .title {
+      text-align: center;
+    }
+    .btn-book {
+      position: absolute;
+      top: 10px;
+      right: 10px;
     }
   }
   .bottom-tools {

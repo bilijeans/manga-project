@@ -4,7 +4,7 @@
       <div class="classifySearch" @click="turnToSearchView">
         <i @click="back()" class="back wd-icon-thin-arrow-left"></i>
       </div>
-      <div class="classifyComic">分类漫画</div>
+      <div class="classifyComic">分类</div>
     </header>
 
     <nav>
@@ -14,13 +14,12 @@
         ref="navBox"
         :key="item.id"
       >
-        <div
-          class="arrow"
+        <i
+          class="wd-icon-arrow-down arrow"
           @click="navMore(index)"
           v-if="index == 0 || index == 3"
         >
-          >
-        </div>
+        </i>
         <div
           :class="{ active: i.value == $data[item.type] }"
           class="classifyItem"
@@ -317,23 +316,23 @@ export default {
       if (i === 0 && this.titleIsActive) {
         this.titleIsActive = !this.titleIsActive;
         this.$refs.navBox[i].className = "navBox navBoxActive";
-        this.$refs.navBox[i].firstElementChild.className = "arrow arrowActive";
-        this.$refs.navBox[i].firstElementChild.textContent = "∧";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow arrowActive wd-icon-arrow-up";
       } else if (i === 0 && !this.titleIsActive) {
         this.titleIsActive = !this.titleIsActive;
         this.$refs.navBox[i].className = "navBox";
-        this.$refs.navBox[i].firstElementChild.className = "arrow";
-        this.$refs.navBox[i].firstElementChild.textContent = ">";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow wd-icon-arrow-down";
       } else if (i === 3 && this.wordIsActive) {
         this.wordIsActive = !this.wordIsActive;
         this.$refs.navBox[i].className = "navBox navBoxActive";
-        this.$refs.navBox[i].firstElementChild.className = "arrow arrowActive";
-        this.$refs.navBox[i].firstElementChild.textContent = "∧";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow arrowActive wd-icon-arrow-up";
       } else {
         this.wordIsActive = !this.wordIsActive;
         this.$refs.navBox[i].className = "navBox";
-        this.$refs.navBox[i].firstElementChild.className = "arrow";
-        this.$refs.navBox[i].firstElementChild.textContent = ">";
+        this.$refs.navBox[i].firstElementChild.className =
+          "arrow wd-icon-arrow-down";
       }
     },
     // loading(e) {
@@ -454,7 +453,7 @@ export default {
   background-color: #fff;
   z-index: 200;
   main {
-    height: calc(100vh - 250px);
+    height: calc(100vh - 210px);
   }
 }
 header {
@@ -464,17 +463,25 @@ header {
   display: flex;
   justify-content: left;
   align-items: center;
-  font-size: 20px;
-  background-color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    rgb(158, 186, 243) 18%,
+    rgba(103, 191, 244, 1) 77%,
+    rgba(49, 220, 255, 1) 100%
+  );
 
   .classifySearch {
-    margin-left: 20px;
+    // margin-left: 20px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 10px;
     line-height: 50px;
     i {
-      font-size: 20px;
+      font-size: 18px;
+      color: #fff;
     }
   }
 
@@ -485,32 +492,32 @@ header {
 
 nav {
   width: 100%;
+  padding: 20px 0;
 
   .navBox {
     position: relative;
     width: 100%;
     padding: 0 10px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 10px;
-    height: 40px;
+    height: 30px;
     overflow: hidden;
 
     .arrow {
       width: 30px;
-      height: 30px;
+      height: 20px;
       text-align: center;
-      line-height: 30px;
-      background-color: #fff;
+      line-height: 20px;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.8), #fff);
       position: absolute;
-      //   top: 5px;
-      right: 0px;
+      right: 20px;
+    }
+    .wd-icon-arrow-down {
+      top: 2px;
     }
 
     .arrowActive {
-      bottom: 0px;
+      bottom: 9px;
     }
 
     .classifyTitle {
@@ -519,8 +526,8 @@ nav {
       line-height: 20px;
       width: 40px;
       height: 20px;
-      margin-left: 10px;
-      margin-top: 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
     }
 
     .classifyItem {
@@ -531,13 +538,13 @@ nav {
       //   width: 40px;
       padding: 0 5px;
       height: 20px;
-      margin-top: 10px;
+      margin-bottom: 10px;
       border: 1px solid white;
       border-radius: 10px;
 
       &.active {
-        border: 1px solid #0bb9d0;
-        color: #0bb9d0;
+        border: 1px solid #00adf1;
+        color: #00adf1;
       }
     }
   }

@@ -12,6 +12,9 @@
       :catalogList="catalogList"
       :nowCatalogId="nowCatalogId"
       :initTools="initTools"
+      :title="nowCatalogName"
+      :bookId="id"
+      :author="author"
       @newChapter="changeChapter"
     ></ReadTools>
   </div>
@@ -37,11 +40,14 @@ export default {
       show: false,
       initTools: true,
       comicData: {},
+      author:null,
+      newChapterName:null
     };
   },
   created() {
     this.id = this.$route.query.id;
     this.nowCatalogId = this.$route.query.chapterId;
+    this.author = this.$route.query.author
     this.getComicData();
     this.handleScroll = debounce(this.handleScroll, 1000);
   },
@@ -77,6 +83,7 @@ export default {
           this.handleScroll,
           true
         );
+        this.newChapterName = data.data.last_chapter_name
       });
     },
     // orderNum() {
@@ -161,6 +168,8 @@ export default {
       bookcase[index].hisChapterName = this.nowCatalogName;
     } else {
       bookcase.push({
+        author:this.author,
+        newChapterName:this.newChapterName,
         bookId: this.id,
         hisChapter: this.nowCatalogId,
         hisChapterName: this.nowCatalogName,
